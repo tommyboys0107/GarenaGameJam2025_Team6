@@ -2,6 +2,8 @@
 using UnityEngine;
 using UnityEngine.Assertions;
 using System.Collections;
+using Cysharp.Threading.Tasks;
+using Sirenix.OdinInspector;
 using UnityEngine.InputSystem;
 
 namespace CliffLeeCL
@@ -24,6 +26,47 @@ namespace CliffLeeCL
         /// </summary>
         public bool canJump = true;
 
+        [Header("Hero")] 
+        public float maxSaturationLevel = 100f; 
+        public int maxPowerEnergy = 3;
+        public int maxWaterEnergy = 3;
+        public float saturationLossPerSecond = 10.0f;
+        public float saturationGainPerFood = 40.0f;
+        [ShowInInspector, ReadOnly]
+        private float currentSaturationLevel;
+        [ShowInInspector, ReadOnly]
+        private int currentPowerEnergy;
+        [ShowInInspector, ReadOnly]
+        private int currentWaterEnergy;
+
+        private float CurrentSaturationLevel
+        {
+            get => currentSaturationLevel;
+            set
+            {
+                currentSaturationLevel = Mathf.Clamp(value, 0, maxSaturationLevel);
+                EventManager.Instance.OnSaturationLevelChanged(currentSaturationLevel);
+            }
+        }
+        private int CurrentPowerEnergy
+        {
+            get => currentPowerEnergy;
+            set
+            {
+                currentPowerEnergy = Mathf.Clamp(value, 0, maxPowerEnergy);
+                EventManager.Instance.OnPowerEnergyChanged(currentPowerEnergy);
+            }
+        }
+        private int CurrentWaterEnergy
+        {
+            get => currentWaterEnergy;
+            set
+            {
+                currentWaterEnergy = Mathf.Clamp(value, 0, maxWaterEnergy);
+                EventManager.Instance.OnWaterEnergyChanged(currentWaterEnergy);
+            }
+        }
+
         /// <summary>
         /// Define where the checker should be relatively to player.
         /// </summary>
@@ -37,7 +80,6 @@ namespace CliffLeeCL
         /// Define how many layers the checker will check.
         /// </summary>
         public LayerMask checkLayer;
-
         
         [Header("FOV transition")]
         /// <summary>
@@ -79,6 +121,7 @@ namespace CliffLeeCL
         /// </summary>
         bool isDrained = false;
         bool isMoving = false;
+        bool isGameOver = false;
         Vector3 moveVelocity = Vector3.zero;
         Vector3 sprintVelocity = Vector3.zero;
         
@@ -93,52 +136,60 @@ namespace CliffLeeCL
             Assert.IsTrue(status, "Need \"PlayerStatus\" component on this gameObject");
 
             status.currentStamina = status.maxStamina;
+            CurrentSaturationLevel = maxSaturationLevel;
+            CurrentPowerEnergy = maxPowerEnergy;
+            CurrentWaterEnergy = maxWaterEnergy;
         }
 
         private void OnEnable()
         {
-            EventManager.Instance.onGetFood += OnGetFood;
-            EventManager.Instance.onGetPowerEnergy += OnGetPowerEnergy;
-            EventManager.Instance.onGetWaterEnergy += OnGetWaterEnergy;
+            EventManager.Instance.onGameOver += OnGameOver;
         }
 
 
         private void OnDisable()
         {
-            EventManager.Instance.onGetFood -= OnGetFood;
-            EventManager.Instance.onGetPowerEnergy -= OnGetPowerEnergy;
-            EventManager.Instance.onGetWaterEnergy -= OnGetWaterEnergy;
+            EventManager.Instance.onGameOver -= OnGameOver;
         }
 
-        private void OnGetWaterEnergy()
+        private void OnGameOver()
         {
-            throw new NotImplementedException();
-        }
-
-        private void OnGetPowerEnergy()
-        {
-            throw new NotImplementedException();
-        }
-
-        private void OnGetFood()
-        {
-            throw new NotImplementedException();
+            isGameOver = true;
         }
         
         /// <summary>
         /// Update is called every frame, if the MonoBehaviour is enabled.
         /// </summary>
-        void Update()
+        private void Update()
         {
+            if (isGameOver)
+            {
+                return;
+            }
             UpdateSprintEffect();
             UpdateStamina();
+            
+            if (CurrentSaturationLevel > 0)
+            {
+                CurrentSaturationLevel -= saturationLossPerSecond * Time.deltaTime;
+            }
+            else
+            {
+                isGameOver = true;
+                EventManager.Instance.OnGameOver();
+            }
         }
 
         /// <summary>
         /// This function is called every fixed framerate frame, if the MonoBehaviour is enabled.
         /// </summary>
-        void FixedUpdate()
+        private void FixedUpdate()
         {
+            if (isGameOver)
+            {
+                return;
+            }
+            
             UpdateIsGrounded();
             UpdateJump();
             if (isMoving)
@@ -151,7 +202,7 @@ namespace CliffLeeCL
         /// <summary>
         /// The function is used to emit sprint effect paticle when the player is sprinting.
         /// </summary>
-        void UpdateSprintEffect()
+        private void UpdateSprintEffect()
         {
             if (isSprinting)
             {
@@ -168,7 +219,7 @@ namespace CliffLeeCL
         /// <summary>
         /// Recover or decrease player's stamina in conditions.
         /// </summary>
-        void UpdateStamina()
+        private void UpdateStamina()
         {
             if (isSprinting)
             {
@@ -179,7 +230,7 @@ namespace CliffLeeCL
                     status.currentStamina = 0.0f;
                     isDrained = true;
                     isSprinting = false;
-                    StartCoroutine("Rest", status.restTimeWhenDrained);
+                    Rest(status.restTimeWhenDrained).Forget();
                 }
             }
             else if(!isDrained) // Have to rest a while if the player is drained.
@@ -196,9 +247,9 @@ namespace CliffLeeCL
         /// </summary>
         /// <param name="restTime">The time the player needs to rest.</param>
         /// <returns>Interface that all coroutines use.</returns>
-        IEnumerator Rest(float restTime)
+        private async UniTaskVoid Rest(float restTime)
         {
-            yield return new WaitForSeconds(restTime);
+            await UniTask.WaitForSeconds(restTime);
             isDrained = false;
         }
 
@@ -252,7 +303,7 @@ namespace CliffLeeCL
 
         public void OnSkillAttack1(InputAction.CallbackContext context)
         {
-            if (context.performed)
+            if (!isGameOver && context.performed)
             {
                 
             }
@@ -260,7 +311,7 @@ namespace CliffLeeCL
 
         public void OnSkillAttack2(InputAction.CallbackContext context)
         {
-            if (context.performed)
+            if (!isGameOver && context.performed)
             {
                 
             } 
