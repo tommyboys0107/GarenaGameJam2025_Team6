@@ -348,47 +348,50 @@ namespace CliffLeeCL
 
         public void OnAttack(InputAction.CallbackContext context)
         {
-            if (!isGameOver && context.performed)
+            if (isGameOver || !context.performed) return;
+            
+            if (interactableItemTransform)
             {
-                if (interactableItemTransform)
+                if (isHoldingItem)
                 {
-                    if (isHoldingItem)
-                    {
-                        interactableItemTransform.parent = null;
-                        interactableItemTransform.transform.position = 
-                            new Vector3(transform.position.x, originalItemYPosition, transform.position.z - 1.0f);
-                        interactableItemTransform = null;
-                        isHoldingItem = false;
-                    }
-                    else
-                    {
-                        originalItemYPosition = interactableItemTransform.position.y;
-                        interactableItemTransform.parent = itemRoot;
-                        interactableItemTransform.localPosition = Vector3.zero;
-                        isHoldingItem = true;
-                    }
+                    interactableItemTransform.parent = null;
+                    interactableItemTransform.transform.position = 
+                        new Vector3(transform.position.x, originalItemYPosition, transform.position.z - 1.0f);
+                    interactableItemTransform = null;
+                    isHoldingItem = false;
                 }
                 else
                 {
-                    
+                    originalItemYPosition = interactableItemTransform.position.y;
+                    interactableItemTransform.parent = itemRoot;
+                    interactableItemTransform.localPosition = Vector3.zero;
+                    isHoldingItem = true;
                 }
+            }
+            else
+            {
+                    
             }
         }
 
         public void OnSkillAttack1(InputAction.CallbackContext context)
         {
-            if (!isGameOver && context.performed)
+            if (isGameOver || !context.performed) return;
+            
+            if (CurrentPowerEnergy > 0)
             {
-                
+                CurrentPowerEnergy--;
             }
         }
 
         public void OnSkillAttack2(InputAction.CallbackContext context)
         {
-            if (!isGameOver && context.performed)
+            if (isGameOver || !context.performed) return;
+            
+            if (CurrentWaterEnergy > 0)
             {
-                
-            } 
+                CurrentWaterEnergy--;
+            }
         }
 
         /// <summary>

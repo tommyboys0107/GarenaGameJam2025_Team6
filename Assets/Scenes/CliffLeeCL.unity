@@ -195,11 +195,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Asset: {fileID: -944628639613478452, guid: 2bcd2660ca9b64942af0de543d8d7100, type: 3}
   m_ActionId: 3c7022bf-7922-4f7c-a998-c437916075ad
---- !u!4 &456372557 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 9058908170557661595, guid: 52ee3eb4d5b14644a9bb89b91dce99bc, type: 3}
-  m_PrefabInstance: {fileID: 2092770480660593119}
-  m_PrefabAsset: {fileID: 0}
 --- !u!114 &516371649
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -402,17 +397,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Asset: {fileID: -944628639613478452, guid: 2bcd2660ca9b64942af0de543d8d7100, type: 3}
   m_ActionId: 44b200b1-1557-4083-816c-b22cbdf77ddf
---- !u!114 &570100458 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 2209930723708728719, guid: 52ee3eb4d5b14644a9bb89b91dce99bc, type: 3}
-  m_PrefabInstance: {fileID: 2092770480660593119}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 96033e782e4b8c842a4f3d040bd8a4eb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &619394800
 GameObject:
   m_ObjectHideFlags: 0
@@ -928,38 +912,6 @@ PrefabInstance:
       propertyPath: m_UIInputModule
       value: 
       objectReference: {fileID: 1294382693}
-    - target: {fileID: 279826483913978954, guid: 52ee3eb4d5b14644a9bb89b91dce99bc, type: 3}
-      propertyPath: m_ActionEvents.Array.data[2].m_PersistentCalls.m_Calls.Array.size
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 279826483913978954, guid: 52ee3eb4d5b14644a9bb89b91dce99bc, type: 3}
-      propertyPath: m_ActionEvents.Array.data[2].m_PersistentCalls.m_Calls.Array.data[0].m_Mode
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 279826483913978954, guid: 52ee3eb4d5b14644a9bb89b91dce99bc, type: 3}
-      propertyPath: m_ActionEvents.Array.data[2].m_PersistentCalls.m_Calls.Array.data[0].m_Target
-      value: 
-      objectReference: {fileID: 570100458}
-    - target: {fileID: 279826483913978954, guid: 52ee3eb4d5b14644a9bb89b91dce99bc, type: 3}
-      propertyPath: m_ActionEvents.Array.data[2].m_PersistentCalls.m_Calls.Array.data[0].m_CallState
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 279826483913978954, guid: 52ee3eb4d5b14644a9bb89b91dce99bc, type: 3}
-      propertyPath: m_ActionEvents.Array.data[2].m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: OnAttack
-      objectReference: {fileID: 0}
-    - target: {fileID: 279826483913978954, guid: 52ee3eb4d5b14644a9bb89b91dce99bc, type: 3}
-      propertyPath: m_ActionEvents.Array.data[2].m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
-      value: CliffLeeCL.HeroController, Assembly-CSharp
-      objectReference: {fileID: 0}
-    - target: {fileID: 279826483913978954, guid: 52ee3eb4d5b14644a9bb89b91dce99bc, type: 3}
-      propertyPath: m_ActionEvents.Array.data[2].m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
-      value: UnityEngine.Object, UnityEngine
-      objectReference: {fileID: 0}
-    - target: {fileID: 2209930723708728719, guid: 52ee3eb4d5b14644a9bb89b91dce99bc, type: 3}
-      propertyPath: itemRoot
-      value: 
-      objectReference: {fileID: 456372557}
     - target: {fileID: 4233096486313289635, guid: 52ee3eb4d5b14644a9bb89b91dce99bc, type: 3}
       propertyPath: m_Name
       value: Hero
