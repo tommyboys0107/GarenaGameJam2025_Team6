@@ -54,7 +54,10 @@ namespace CliffLeeCL
             set
             {
                 currentPowerEnergy = Mathf.Clamp(value, 0, maxPowerEnergy);
-                EventManager.Instance.OnPowerEnergyChanged(currentPowerEnergy);
+                if (value == currentPowerEnergy)
+                {
+                    EventManager.Instance.OnPowerEnergyChanged(currentPowerEnergy);
+                }
             }
         }
         private int CurrentWaterEnergy
@@ -63,7 +66,10 @@ namespace CliffLeeCL
             set
             {
                 currentWaterEnergy = Mathf.Clamp(value, 0, maxWaterEnergy);
-                EventManager.Instance.OnWaterEnergyChanged(currentWaterEnergy);
+                if (value == currentWaterEnergy)
+                {
+                    EventManager.Instance.OnWaterEnergyChanged(currentWaterEnergy);
+                }
             }
         }
 
@@ -137,8 +143,6 @@ namespace CliffLeeCL
 
             status.currentStamina = status.maxStamina;
             CurrentSaturationLevel = maxSaturationLevel;
-            CurrentPowerEnergy = maxPowerEnergy;
-            CurrentWaterEnergy = maxWaterEnergy;
         }
 
         private void OnEnable()
@@ -196,6 +200,25 @@ namespace CliffLeeCL
             {
                 var newPosition = rigid.position + (isSprinting ? sprintVelocity : moveVelocity);
                 rigid.MovePosition(newPosition);   
+            }
+        }
+
+        private void OnTriggerEnter(Collider other)
+        {
+            if (other.CompareTag("Food"))
+            {
+                CurrentSaturationLevel += saturationGainPerFood;
+                other.gameObject.SetActive(false);
+            }
+            else if (other.CompareTag("WaterEnergy"))
+            {
+                CurrentWaterEnergy++;
+                other.gameObject.SetActive(false);
+            }
+            else if (other.CompareTag("PowerEnergy"))
+            {
+                CurrentPowerEnergy++;
+                other.gameObject.SetActive(false);
             }
         }
 

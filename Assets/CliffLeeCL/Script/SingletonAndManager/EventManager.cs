@@ -32,7 +32,6 @@ namespace CliffLeeCL
         public event Action<int> onWaterEnergyChanged;
         public event Action<int> onPowerEnergyChanged;
         
-        
         public void OnGameOver()
         {
             onGameOver?.Invoke();
@@ -47,13 +46,11 @@ namespace CliffLeeCL
         public void OnWaterEnergyChanged(int finalValue)
         {
             onWaterEnergyChanged?.Invoke(finalValue);
-            Debug.Log($"On Water Energy Changed, final {finalValue}");
         }
 
         public void OnPowerEnergyChanged(int finalValue)
         {
             onPowerEnergyChanged?.Invoke(finalValue);
-            Debug.Log($"On Power Energy Changed, final {finalValue}");
         }
     }
 }

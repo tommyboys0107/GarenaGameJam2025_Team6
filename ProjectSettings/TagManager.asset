@@ -8,6 +8,9 @@ TagManager:
   - Enemy
   - Item
   - CraftingTable
+  - Food
+  - PowerEnergy
+  - WaterEnergy
   layers:
   - Default
   - TransparentFX
