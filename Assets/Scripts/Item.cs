@@ -4,6 +4,9 @@ public class Item : MonoBehaviour
 {
     [SerializeField]
     BoxCollider boxCollider = null;
+
+    [SerializeField]
+    GameObject hint = null;
     public enum ItemType
     {
         DeadBody,
@@ -19,4 +22,9 @@ public class Item : MonoBehaviour
         boxCollider.enabled = false;
     }
 
+
+    public void SetHint(bool enable)
+    {
+        hint.SetActive(enable);
+    }
 }

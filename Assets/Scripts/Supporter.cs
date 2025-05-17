@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using CliffLeeCL;
 using Sirenix.OdinInspector;
 using UnityEngine;
@@ -103,6 +104,8 @@ public class Supporter : MonoBehaviour
     Item curItem = null;
     CraftingTable craftingTable = null;
 
+    List<Item> itemList = new List<Item>(); 
+
     void Start()
     {
         encounterItem = null;
@@ -112,8 +115,16 @@ public class Supporter : MonoBehaviour
     {
         if (other.CompareTag("Item"))
         {
-            encounterItem = other.GetComponent<Item>();
-            
+            var item = other.GetComponent<Item>();
+            if (encounterItem == null)
+            {
+                encounterItem = item;
+                item.SetHint(true);
+            }
+            // if (!itemList.Contains(item))
+            // {
+            //     itemList.Add(item);
+            // }
         }
         else if (other.CompareTag("CraftingTable"))
         {
@@ -126,8 +137,11 @@ public class Supporter : MonoBehaviour
         if (other.CompareTag("Item"))
         {
             var item = other.GetComponent<Item>();
+            // if (itemList.Contains(item))
             if (encounterItem == item)
             {
+                item.SetHint(false);
+                // itemList.Remove(item);
                 encounterItem = null;
             }
         }
