@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 using UnityEngine.Assertions;
 using System.Collections;
 using UnityEngine.InputSystem;
@@ -94,6 +95,36 @@ namespace CliffLeeCL
             status.currentStamina = status.maxStamina;
         }
 
+        private void OnEnable()
+        {
+            EventManager.Instance.onGetFood += OnGetFood;
+            EventManager.Instance.onGetPowerEnergy += OnGetPowerEnergy;
+            EventManager.Instance.onGetWaterEnergy += OnGetWaterEnergy;
+        }
+
+
+        private void OnDisable()
+        {
+            EventManager.Instance.onGetFood -= OnGetFood;
+            EventManager.Instance.onGetPowerEnergy -= OnGetPowerEnergy;
+            EventManager.Instance.onGetWaterEnergy -= OnGetWaterEnergy;
+        }
+
+        private void OnGetWaterEnergy()
+        {
+            throw new NotImplementedException();
+        }
+
+        private void OnGetPowerEnergy()
+        {
+            throw new NotImplementedException();
+        }
+
+        private void OnGetFood()
+        {
+            throw new NotImplementedException();
+        }
+        
         /// <summary>
         /// Update is called every frame, if the MonoBehaviour is enabled.
         /// </summary>
@@ -217,6 +248,22 @@ namespace CliffLeeCL
             {
                 isMoving = false;
             }
+        }
+
+        public void OnSkillAttack1(InputAction.CallbackContext context)
+        {
+            if (context.performed)
+            {
+                
+            }
+        }
+
+        public void OnSkillAttack2(InputAction.CallbackContext context)
+        {
+            if (context.performed)
+            {
+                
+            } 
         }
 
         /// <summary>

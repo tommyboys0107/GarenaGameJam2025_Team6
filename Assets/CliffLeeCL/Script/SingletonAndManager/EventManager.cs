@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 namespace CliffLeeCL
 {
@@ -26,40 +27,30 @@ namespace CliffLeeCL
     /// </code>
     public class EventManager : Singleton<EventManager>
     {
-        /// <summary>
-        /// Define default event's function signature.
-        /// </summary>
-        public delegate void DefaultEventHandler();
-        /// <summary>
-        /// The event is called when game over.
-        /// </summary>
-        /// <seealso cref="OnGameOver"/>
-        public event DefaultEventHandler onGameOver;
-        /// <summary>
-        /// The event is called when a player scored. Only can call on the server(SyncEvent).
-        /// </summary>
-        /// <seealso cref="OnPlayerScored"/>
-        public event DefaultEventHandler onPlayerScored;
-
-        /// <summary>
-        /// The function is called when a player scored.
-        /// </summary>
-        /// <seealso cref="onGameOver"/>
+        public event Action onGameOver;
+        public event Action onGetFood;
+        public event Action onGetWaterEnergy;
+        public event Action onGetPowerEnergy;
+        
         public void OnGameOver()
         {
-            if (onGameOver != null)
-                onGameOver();
+            onGameOver?.Invoke();
             Debug.Log("OnGameOver event is invoked!");
         }
 
-        /// <summary>
-        /// The function is called when a player scored.
-        /// </summary>
-        /// <seealso cref="onPlayerScored"/>
-        public void OnPlayerScored()
+        public void OnGetFood()
         {
-            if (onPlayerScored != null)
-                onPlayerScored();
+            onGetFood?.Invoke();
+        }
+
+        public void OnGetWaterEnergy()
+        {
+            onGetWaterEnergy?.Invoke();
+        }
+
+        public void OnGetPowerEnergy()
+        {
+            onGetPowerEnergy?.Invoke();
         }
     }
 }
