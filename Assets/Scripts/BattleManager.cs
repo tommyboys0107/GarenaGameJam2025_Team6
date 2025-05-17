@@ -39,7 +39,7 @@ public class BattleManager : MonoBehaviour
     }
     void IntoBossFight()
     {
-        UIManager.Instance.bossHealthPanel.SetActive(true);
+        BattleUIManager.Instance.bossHealthPanel.SetActive(true);
         Debug.Log("[Battlemanager] into bossfight");
         GameObject bossObj = Instantiate(bossPrefab, bossSpawnPoint.position, Quaternion.identity);
          // bossObj.GetComponent<BossController>().PlayEntranceAnimation();
@@ -50,7 +50,7 @@ public class BattleManager : MonoBehaviour
     {
         currentState = BattleState.GameOver;
         // 展示結算面板
-        UIManager.Instance.ShowResultPanel(isVictory);
+        BattleUIManager.Instance.ShowResultPanel(isVictory);
         Time.timeScale = 0f; // 暫停遊戲邏輯
     }
 }

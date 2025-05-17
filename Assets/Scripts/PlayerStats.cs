@@ -23,7 +23,7 @@ public class PlayerStats : MonoBehaviour
     public void TakeDamage(int damage)
     {
         currentHealth = Mathf.Max(0, currentHealth - damage);
-        UIManager.Instance.UpdateHealthBar(currentHealth);
+        BattleUIManager.Instance.UpdateHealthBar(currentHealth);
 
         if (currentHealth <= 0)
             BattleManager.Instance.EndBattle(false);

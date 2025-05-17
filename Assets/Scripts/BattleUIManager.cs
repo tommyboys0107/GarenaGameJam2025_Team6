@@ -1,9 +1,9 @@
 using UnityEngine;
 using UnityEngine.UI;
 using System.Collections;
-public class UIManager : MonoBehaviour
+public class BattleUIManager : MonoBehaviour
 {
-    public static UIManager Instance;
+    public static BattleUIManager Instance;
     [Header("Battle HUD")]
     public Slider healthSlider;
     public Text timerText;
