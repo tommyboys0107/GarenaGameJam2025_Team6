@@ -1,5 +1,6 @@
 using System;
 using CliffLeeCL;
+using Sirenix.OdinInspector;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -98,19 +99,25 @@ public class Supporter : MonoBehaviour
     [Header("道具相關")]
     [SerializeField]
     Transform itemRoot = null;
+    Item encounterItem = null;
     Item curItem = null;
+    CraftingTable craftingTable = null;
 
     void Start()
     {
-        curItem = null;
+        encounterItem = null;
     }
 
     void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Item"))
         {
-            curItem = other.GetComponent<Item>();
+            encounterItem = other.GetComponent<Item>();
             
+        }
+        else if (other.CompareTag("CraftingTable"))
+        {
+            craftingTable = other.GetComponent<CraftingTable>();
         }
     }
 
@@ -119,10 +126,14 @@ public class Supporter : MonoBehaviour
         if (other.CompareTag("Item"))
         {
             var item = other.GetComponent<Item>();
-            if (curItem == item)
+            if (encounterItem == item)
             {
-                curItem = null;
+                encounterItem = null;
             }
+        }
+        else if (other.CompareTag("CraftingTable"))
+        {
+            craftingTable = null;
         }
     }
 
@@ -153,16 +164,24 @@ public class Supporter : MonoBehaviour
         }
     }
 
+    [Button]
     public void OnAttack(InputAction.CallbackContext context)
     {
         if (context.performed)
         {
             isinteractive = true;
-            if (curItem != null)
+            if (encounterItem != null)
             {
-                curItem.PlayerGetItem();
-                curItem.transform.parent = itemRoot;
-                curItem.transform.localPosition = Vector3.zero;
+                encounterItem.PlayerGetItem();
+                encounterItem.transform.parent.parent = itemRoot;
+                encounterItem.transform.parent.localPosition = Vector3.zero;
+                curItem = encounterItem;
+                encounterItem = null;
+            }
+            else if (craftingTable != null && curItem != null)
+            {
+                craftingTable.CraftItem(curItem);
+                curItem = null;
             }
         }
         else

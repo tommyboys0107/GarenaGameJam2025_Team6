@@ -19,6 +19,10 @@ public class Enemy : MonoBehaviour
     // 暈倒時間
     [SerializeField]
     float breakTime = 30f;
+    [SerializeField]
+    GameObject enemyObj = null;
+    [SerializeField]
+    GameObject deadBodyObj = null;
 
     bool isHit;
     bool isDead;
@@ -29,6 +33,8 @@ public class Enemy : MonoBehaviour
     void Start()
     {
         player = GameObject.Find("Player").transform;
+        enemyObj.SetActive(true);
+        deadBodyObj.SetActive(false);
     }
 
     void Update()
@@ -91,9 +97,11 @@ public class Enemy : MonoBehaviour
 
     void OnTriggerEnter(Collider other)
     {
-        if (isHit && other.CompareTag("Build"))
+        if (!isDead && isHit && other.CompareTag("Build"))
         {
             isDead = true;
+            enemyObj.SetActive(false);
+            deadBodyObj.SetActive(true);
             Debug.Log("[Enemy] Break down!");
         }
     }

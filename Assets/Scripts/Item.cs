@@ -2,6 +2,8 @@ using UnityEngine;
 
 public class Item : MonoBehaviour
 {
+    [SerializeField]
+    BoxCollider boxCollider = null;
     public enum ItemType
     {
         DeadBody,
@@ -14,7 +16,7 @@ public class Item : MonoBehaviour
 
     public void PlayerGetItem()
     {
-        
+        boxCollider.enabled = false;
     }
 
 }
