@@ -40,15 +40,9 @@ namespace CliffLeeCL
             {
                 int i = 0;
 
-                for(i = 0; i < 10 && IsOverlaidWithObject(worldSpawnPoint); i++)
-                {
-                    localSpawnPoint = new Vector3(Random.Range(-halfAreaSize.x, halfAreaSize.x),
+                localSpawnPoint = new Vector3(Random.Range(-halfAreaSize.x, halfAreaSize.x),
                         Random.Range(-halfAreaSize.y, halfAreaSize.y), Random.Range(-halfAreaSize.z, halfAreaSize.z));
                     worldSpawnPoint = transform.TransformPoint(localSpawnPoint);
-                }
-
-                if (i == 10)
-                    return Vector3.zero; // means no valid spawn points.
             }
 
             return worldSpawnPoint;
