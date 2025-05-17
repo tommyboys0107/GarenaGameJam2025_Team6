@@ -14,7 +14,7 @@ on:
           - Release
 
 env:
-  PROJECT_NAME: 'GarenaGameJam2025_Team6'
+  PROJECT_NAME: 'Hero Needs Help'
   SYMBOL_CONFIG: ${{ inputs.symbolConfig || 'Debug' }}
 
 jobs:
@@ -86,7 +86,7 @@ jobs:
       - name: Upload GitHub Pages Artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: artifacts/GarenaGameJam_Team6
+          path: artifacts/${{ env.PROJECT_NAME }}
   
   deploy-github-pages:
     needs: build-unity-project-webgl
