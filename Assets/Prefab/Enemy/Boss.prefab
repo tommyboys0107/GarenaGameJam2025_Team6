@@ -9,7 +9,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4375355273850855401}
-  - component: {fileID: 4802797849201450389}
   m_Layer: 0
   m_Name: Boss
   m_TagString: Untagged
@@ -33,23 +32,6 @@ Transform:
   - {fileID: 2545381315340629531}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &4802797849201450389
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 548519278399116877}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7d67fe3b6eb7ac84495af77015762b38, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  speed: 3
-  stopDistance: 2
-  hitDistance: 20
-  hitDuration: 1
-  breakTime: 30
 --- !u!1 &7961737635758174275
 GameObject:
   m_ObjectHideFlags: 0
@@ -59,6 +41,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2545381315340629531}
+  - component: {fileID: 3667603949884606174}
   - component: {fileID: 9117383129108168541}
   - component: {fileID: 6367945229298938572}
   - component: {fileID: 4061935263313297304}
@@ -84,6 +67,40 @@ Transform:
   m_Children: []
   m_Father: {fileID: 4375355273850855401}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &3667603949884606174
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7961737635758174275}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dd6e1850189da7e4792061b76901d76b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  player: {fileID: 0}
+  followSpeed: 3.5
+  skillCooldown: 10
+  speed: 3
+  stopDistance: 2
+  hitDistance: 5
+  hitDuration: 1
+  obstacleCount: 50
+  radius: 7
+  obstaclePrefab: {fileID: 8242078466828642764, guid: d3167c9eadf9c604b991b78915f3f294, type: 3}
+  maxHealth: 500
+  stunDuration: 2
+  breakTime: 1
+  hitDamage: 10
+  obstacleCollisionCount: 0
+  bossSpriteRenderer: {fileID: 9117383129108168541}
+  normalBossImage: {fileID: 8596640243658272642, guid: 7248916b0f6737540bdd68f3d8e40967, type: 3}
+  stunnedBossImage: {fileID: 8723349686400296270, guid: 44a9a0d7ed4f3474b936e3d8b936ca48, type: 3}
+  StunSE: {fileID: 8300000, guid: 8d5127a97b1d1024698c90b060ea34ab, type: 3}
+  magicSE: {fileID: 8300000, guid: 4ff700487e783ea4c8017d5bb37afe52, type: 3}
+  buildingExplodeSE: {fileID: 8300000, guid: f718613c7a360104b9668bbe15b1e8f9, type: 3}
+  fillImage: {fileID: 0}
 --- !u!212 &9117383129108168541
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -185,5 +202,5 @@ Rigidbody:
   m_UseGravity: 0
   m_IsKinematic: 1
   m_Interpolate: 0
-  m_Constraints: 0
+  m_Constraints: 4
   m_CollisionDetection: 0

@@ -1,29 +1,23 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-using System;
 using System.Collections;
-using System.Threading;
 using Cysharp.Threading.Tasks;
-using DG.Tweening;
 using Sirenix.OdinInspector;
-using UnityEngine;
 public class BossController : MonoBehaviour
 {
     [Header("Movement")]
-    [SerializeField] Transform player;
+    // [SerializeField] Transform player;
     [SerializeField] float followSpeed = 3.5f;
     [SerializeField] float skillCooldown = 15f;
-    [SerializeField]
-    float speed = 3f;
-    [SerializeField]
-    float stopDistance = 10f;
-    [SerializeField]
-    float hitDistance = 10f;
-    [SerializeField]
-    float hitDuration = 1.0f;
+    // [SerializeField] float speed = 3f;
+    [SerializeField] float stopDistance = 10f;
+    [SerializeField] float hitDistance = 10f;
+    [SerializeField] float hitDuration = 1.0f;
 
     [Header("Combat")]
+    [SerializeField] int obstacleCount = 8;
+    [SerializeField] float radius = 5f;
     [SerializeField] GameObject obstaclePrefab;
     [SerializeField] int maxHealth = 500;
     // [SerializeField] float knockbackForce = 15f;
@@ -34,9 +28,17 @@ public class BossController : MonoBehaviour
     [SerializeField]
     int obstacleCollisionCount;
     bool isStunned;
+    [SerializeField] SpriteRenderer bossSpriteRenderer;
+    [SerializeField] Sprite normalBossImage;
+    [SerializeField] Sprite stunnedBossImage;
+    [Header("SE")]
+    [SerializeField] AudioClip StunSE;
+    [SerializeField] AudioClip magicSE;
+    [SerializeField] AudioClip buildingExplodeSE;
 
-    [Header("UI")]
-    [SerializeField] private Image fillImage;
+    // [Header("UI")]
+    // [SerializeField] private Image fillImage;
+
 
     void Start()
     {
@@ -50,12 +52,12 @@ public class BossController : MonoBehaviour
     {
         if (!isStunned)
         {
-            float distance = Vector3.Distance(transform.position, player.position);
+            float distance = Vector3.Distance(transform.position, BattleManager.Instance.heroPoint.position);
 
             if (distance > stopDistance)
             {
                 // 朝 player 前進
-                Vector3 direction = (player.position - transform.position).normalized;
+                Vector3 direction = (BattleManager.Instance.heroPoint.position - transform.position).normalized;
                 // y 軸不動
                 direction.y = 0;
                 transform.position += direction * followSpeed * Time.deltaTime;
@@ -75,13 +77,11 @@ public class BossController : MonoBehaviour
 
     void CreateObstacleCircle()
     {
-        int obstacleCount = 8;
-        float radius = 5f;
 
         for (int i = 0; i < obstacleCount; i++)
         {
             float angle = i * Mathf.PI * 2 / obstacleCount;
-            Vector3 pos = player.position + new Vector3(
+            Vector3 pos = BattleManager.Instance.heroPoint.position + new Vector3(
                 Mathf.Cos(angle) * radius,
                 0,
                 Mathf.Sin(angle) * radius
@@ -95,7 +95,8 @@ public class BossController : MonoBehaviour
         if (obstacleCollisionCount < 3) return;
 
         currentHealth = Mathf.Max(0, currentHealth - hitDamage);
-        fillImage.fillAmount = Mathf.Clamp01(currentHealth / maxHealth);
+        BattleManager.Instance.HitSE();
+        BattleUIManager.Instance.bossHealthBar.fillAmount = Mathf.Clamp01(currentHealth / maxHealth);
         if (currentHealth <= 0)
         {
             BattleManager.Instance.EndBattle(true);
@@ -105,6 +106,7 @@ public class BossController : MonoBehaviour
     public void OnHit()
     {
         // isHit = true;
+
         if (isStunned)
             TakeDamage();
         else
@@ -114,7 +116,7 @@ public class BossController : MonoBehaviour
     IEnumerator ShowHitAnimAndMove()
     {
         // 朝 player 反向前進
-        Vector3 direction = (player.position - transform.position).normalized * hitDistance;
+        Vector3 direction = (BattleManager.Instance.heroPoint.position - transform.position).normalized * hitDistance;
         HitMove().Forget();
 
         yield return new WaitForSeconds(breakTime);
@@ -124,7 +126,8 @@ public class BossController : MonoBehaviour
     {
         // 計算目標位置（反向移動 hitDistance）
         Vector3 start = transform.localPosition;
-        Vector3 end = start - (player.position - transform.position).normalized * hitDistance;
+        Vector3 end = start - (BattleManager.Instance.heroPoint.position - transform.position).normalized * hitDistance;
+        end.y = 1f;
 
         float timer = 0f;
 
@@ -145,18 +148,34 @@ public class BossController : MonoBehaviour
         {
             Debug.Log("[Boss] enter build");
             obstacleCollisionCount++;
-            if (obstacleCollisionCount >= 3)
+
+            // 觸發破壞建築
+            BreakBuilding(collision.gameObject);
+
+            if (obstacleCollisionCount == 3 && !isStunned)
             {
+                Debug.Log("[Boss] obstacleCollisionCount" + obstacleCollisionCount);
+                obstacleCollisionCount = 0;
                 StartCoroutine(StunRoutine());
             }
         }
+    }
+    void BreakBuilding(GameObject go)
+    {
+        go.SetActive(false);
+        BattleManager.Instance.PlaySE(buildingExplodeSE);
     }
 
     System.Collections.IEnumerator StunRoutine()
     {
         isStunned = true;
+        Debug.Log("[Boss] Stun start");
+        BattleManager.Instance.PlaySE(StunSE);
+        bossSpriteRenderer.sprite = stunnedBossImage;
         yield return new WaitForSeconds(stunDuration);
         isStunned = false;
+        bossSpriteRenderer.sprite = normalBossImage;
+        Debug.Log("[Boss] Stun ends");
         obstacleCollisionCount = 0;
     }
 }

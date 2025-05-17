@@ -46,4 +46,29 @@ public class PlayerStats : MonoBehaviour
     {
         totalSavedCleaner++;
     }
+    int CalculateHeroScore()
+    {
+        return totalBuildingBreaked * 10
+             + totalEnemiesKilled * 100
+             + totalSavedCleaner * 200;
+    }
+    int CalculateCleanerScore()
+    {
+        return totalGainedEnergy;
+    }
+
+    public string GetHeroRank()
+    {
+        int score = CalculateHeroScore();
+        if (score >= 5000) return "S";
+        if (score >= 3000) return "A";
+        return "B";
+    }
+    public string GetCleanerRank()
+    {
+        int score = CalculateCleanerScore();
+        if (score >= 30) return "S";
+        if (score >= 10) return "A";
+        return "B";
+    }
 }

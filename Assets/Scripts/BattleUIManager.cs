@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 using System.Collections;
+using TMPro;
 public class BattleUIManager : MonoBehaviour
 {
     public static BattleUIManager Instance;
@@ -8,14 +9,22 @@ public class BattleUIManager : MonoBehaviour
     public Slider healthSlider;
     public Text timerText;
     public GameObject bossHealthPanel;
+    public Image bossHealthBar;
 
     [Header("Result Panel")]
     public GameObject resultPanel;
-    public Text resultText;
-    public Text damageText;
-    public Text killsText;
-    public Text rankText;
-
+    public TMP_Text titleText;
+    public TMP_Text heroResultText;
+    public TMP_Text cleanerResultText;
+    public TMP_Text buildingsDamageText;
+    public TMP_Text energyText;
+    public TMP_Text killsText;
+    public AudioClip victoryClip;
+    public AudioClip loseClip;
+    void Awake()
+    {
+        Instance = this;
+    }
     void Start()
     {
         resultPanel.SetActive(false);
@@ -36,26 +45,24 @@ public class BattleUIManager : MonoBehaviour
     public void ShowResultPanel(bool isVictory)
     {
         resultPanel.SetActive(true);
-        resultText.text = isVictory ? "VICTORY" : "DEFEAT";
-        // damageText.text = PlayerStats.Instance.totalDamageDealt.ToString();
-        // killsText.text = PlayerStats.Instance.totalEnemiesKilled.ToString();
+        if (isVictory)
+        {
+            titleText.text = "VICTORY";
+            BattleManager.Instance.PlaySE(victoryClip);
+        }
+        else
+        {
+            titleText.text = "Lose";
+            BattleManager.Instance.PlaySE(loseClip);
+        }
 
         // 評價系統範例
-        int score = CalculateScore();
-        rankText.text = GetRank(score);
+        heroResultText.text = PlayerStats.Instance.GetHeroRank();
+        cleanerResultText.text = PlayerStats.Instance.GetCleanerRank();
+        buildingsDamageText.text = PlayerStats.Instance.totalBuildingBreaked.ToString();
+        killsText.text = PlayerStats.Instance.totalEnemiesKilled.ToString();
+        energyText.text = PlayerStats.Instance.totalGainedEnergy.ToString();
     }
 
-    int CalculateScore()
-    {
-        return PlayerStats.Instance.totalBuildingBreaked * 10
-             + PlayerStats.Instance.totalEnemiesKilled * 100
-             + PlayerStats.Instance.totalSavedCleaner * 200;
-    }
-
-    string GetRank(int score)
-    {
-        if (score >= 5000) return "S";
-        if (score >= 3000) return "A";
-        return "B";
-    }
+    
 }
