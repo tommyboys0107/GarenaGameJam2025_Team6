@@ -26,12 +26,19 @@ namespace CliffLeeCL
         /// </summary>
         public bool canJump = true;
 
-        [Header("Hero")] 
-        public float maxSaturationLevel = 100f; 
-        public int maxPowerEnergy = 3;
-        public int maxWaterEnergy = 3;
-        public float saturationLossPerSecond = 10.0f;
-        public float saturationGainPerFood = 40.0f;
+        [Header("Hero")]
+        [SerializeField]
+        private Transform itemRoot;
+        [SerializeField]
+        private float maxSaturationLevel = 100f; 
+        [SerializeField]
+        private int maxPowerEnergy = 3;
+        [SerializeField]
+        private int maxWaterEnergy = 3;
+        [SerializeField]
+        private float saturationLossPerSecond = 10.0f;
+        [SerializeField]
+        private float saturationGainPerFood = 40.0f;
         [ShowInInspector, ReadOnly]
         private float currentSaturationLevel;
         [ShowInInspector, ReadOnly]
@@ -103,33 +110,36 @@ namespace CliffLeeCL
         /// <summary>
         /// Time that transition between normalFOV to sprintFOV.
         /// </summary>
-        float normalToSprintTime = 0.0f;
+        private float normalToSprintTime = 0.0f;
         /// <summary>
         /// Time that transition between sprintFOV to normalFOV.
         /// </summary>
-        float sprintToNormalTime = 0.0f;
+        private float sprintToNormalTime = 0.0f;
         
-        Rigidbody rigid;
+        private Rigidbody rigid;
         /// <summary>
         /// Is used to get movement related data.
         /// </summary>
-        PlayerStatus status;
+        private PlayerStatus status;
         /// <summary>
         /// Is true when player is on the ground.
         /// </summary>
-        bool isGrounded = true;
+        private bool isGrounded = true;
         /// <summary>
         /// Is true when player is sprinting.
         /// </summary>
-        bool isSprinting = false;
+        private bool isSprinting = false;
         /// <summary>
         /// Is true when player drain his stamina.
         /// </summary>
-        bool isDrained = false;
-        bool isMoving = false;
-        bool isGameOver = false;
-        Vector3 moveVelocity = Vector3.zero;
-        Vector3 sprintVelocity = Vector3.zero;
+        private bool isDrained = false;
+        private bool isMoving = false;
+        private bool isGameOver = false;
+        private bool isHoldingItem = false;
+        private Vector3 moveVelocity = Vector3.zero;
+        private Vector3 sprintVelocity = Vector3.zero;
+        private float originalItemYPosition;
+        private Transform interactableItemTransform;
         
         /// <summary>
         /// Start is called once on the frame when a script is enabled.
@@ -219,6 +229,18 @@ namespace CliffLeeCL
             {
                 CurrentPowerEnergy++;
                 other.gameObject.SetActive(false);
+            }
+            else if (other.CompareTag("CraftingTable"))
+            {
+                interactableItemTransform = other.transform.parent;
+            }
+        }
+
+        private void OnTriggerExit(Collider other)
+        {
+            if (other.CompareTag("CraftingTable"))
+            {
+                interactableItemTransform = null;
             }
         }
 
@@ -321,6 +343,35 @@ namespace CliffLeeCL
             else
             {
                 isMoving = false;
+            }
+        }
+
+        public void OnAttack(InputAction.CallbackContext context)
+        {
+            if (!isGameOver && context.performed)
+            {
+                if (interactableItemTransform)
+                {
+                    if (isHoldingItem)
+                    {
+                        interactableItemTransform.parent = null;
+                        interactableItemTransform.transform.position = 
+                            new Vector3(transform.position.x, originalItemYPosition, transform.position.z - 1.0f);
+                        interactableItemTransform = null;
+                        isHoldingItem = false;
+                    }
+                    else
+                    {
+                        originalItemYPosition = interactableItemTransform.position.y;
+                        interactableItemTransform.parent = itemRoot;
+                        interactableItemTransform.localPosition = Vector3.zero;
+                        isHoldingItem = true;
+                    }
+                }
+                else
+                {
+                    
+                }
             }
         }
 
