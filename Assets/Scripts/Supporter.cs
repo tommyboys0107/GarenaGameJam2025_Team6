@@ -178,7 +178,6 @@ public class Supporter : MonoBehaviour
         }
     }
 
-    [Button]
     public void OnAttack(InputAction.CallbackContext context)
     {
         if (context.performed)
@@ -203,5 +202,24 @@ public class Supporter : MonoBehaviour
             isinteractive = false;
         }
     }
+
+    [Button]
+    public void AttackTest()
+    {
+        if (encounterItem != null)
+        {
+            encounterItem.PlayerGetItem();
+            encounterItem.transform.parent.parent = itemRoot;
+            encounterItem.transform.parent.localPosition = Vector3.zero;
+            curItem = encounterItem;
+            encounterItem = null;
+        }
+        else if (craftingTable != null && curItem != null)
+        {
+            craftingTable.CraftItem(curItem);
+            curItem = null;
+        }
+    }
+
 
 }

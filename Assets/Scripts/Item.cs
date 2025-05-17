@@ -17,8 +17,14 @@ public class Item : MonoBehaviour
     [SerializeField]
     ItemType itemType = ItemType.DeadBody;
 
+    public ItemType GetType()
+    {
+        return itemType;
+    }
+
     public void PlayerGetItem()
     {
+        SetHint(false);
         boxCollider.enabled = false;
     }
 
