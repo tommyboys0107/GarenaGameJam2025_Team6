@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.Assertions;
 using System.Collections;
+using UnityEngine.InputSystem;
 
 namespace CliffLeeCL
 {
@@ -76,24 +77,10 @@ namespace CliffLeeCL
         /// Is true when player drain his stamina.
         /// </summary>
         bool isDrained = false;
-
-        private InputSystem_Actions inputActions;
-
-        private void Awake()
-        {
-            inputActions = new InputSystem_Actions();
-        }
-
-        private void OnEnable()
-        {
-            inputActions.Enable();
-        }
-
-        private void OnDisable()
-        {
-           inputActions.Disable(); 
-        }
-
+        bool isMoving = false;
+        Vector3 moveVelocity = Vector3.zero;
+        Vector3 sprintVelocity = Vector3.zero;
+        
         /// <summary>
         /// Start is called once on the frame when a script is enabled.
         /// </summary>
@@ -121,9 +108,13 @@ namespace CliffLeeCL
         /// </summary>
         void FixedUpdate()
         {
-            UpdateMovement();
             UpdateIsGrounded();
             UpdateJump();
+            if (isMoving)
+            {
+                var newPosition = rigid.position + (isSprinting ? sprintVelocity : moveVelocity);
+                rigid.MovePosition(newPosition);   
+            }
         }
 
         /// <summary>
@@ -156,6 +147,7 @@ namespace CliffLeeCL
                 {
                     status.currentStamina = 0.0f;
                     isDrained = true;
+                    isSprinting = false;
                     StartCoroutine("Rest", status.restTimeWhenDrained);
                 }
             }
@@ -199,28 +191,31 @@ namespace CliffLeeCL
                 Camera.main.fieldOfView = Mathf.Lerp(Camera.main.fieldOfView, normalFOV, sprintToNormalTime / FOVTransitionTime);
             }
         }
-        
-        /// <summary>
-        /// Update player's movement via assigning new velocity.
-        /// </summary>
-        private void UpdateMovement()
+
+        public void OnSprint(InputAction.CallbackContext context)
         {
-            var moveInput = inputActions.Player.Move.ReadValue<Vector2>();
-            var isSprintKeyPressed = inputActions.Player.Sprint.IsPressed(); 
-            var moveVelocity = new Vector3(moveInput.x, 0, moveInput.y) * (status.movingSpeed * Time.fixedDeltaTime);
-            var sprintVelocity = new Vector3(moveInput.x, 0, moveInput.y) * (status.sprintSpeed * Time.fixedDeltaTime);
-            
-            if (canSprint && isSprintKeyPressed && (status.currentStamina > 0))
+            if (canSprint && context.performed && (status.currentStamina > 0))
             {
-                var newPosition = rigid.position + sprintVelocity;
-                rigid.MovePosition(newPosition);
-                isSprinting = sprintVelocity.sqrMagnitude > Mathf.Epsilon; // Is really moving.
+                isSprinting = true;
             }
             else
             {
-                var newPosition = rigid.position + moveVelocity;
-                rigid.MovePosition(newPosition);                 
                 isSprinting = false;
+            }
+        }
+
+        public void OnMove(InputAction.CallbackContext context)
+        {
+            if (context.performed)
+            {
+                var moveInput = context.ReadValue<Vector2>();
+                moveVelocity = new Vector3(moveInput.x, 0, moveInput.y) * (status.movingSpeed * Time.fixedDeltaTime);
+                sprintVelocity = new Vector3(moveInput.x, 0, moveInput.y) * (status.sprintSpeed * Time.fixedDeltaTime);
+                isMoving = true;
+            }
+            else
+            {
+                isMoving = false;
             }
         }
 
@@ -240,14 +235,13 @@ namespace CliffLeeCL
         /// </summary>
         private void UpdateJump()
         {
-            var isJumping = inputActions.Player.Jump.triggered; 
-
-            if(canJump && isGrounded && isJumping)
-            {
-                rigid.linearVelocity = new Vector3(rigid.linearVelocity.x, 0f, rigid.linearVelocity.z);
-                rigid.AddForce(new Vector3(0f, status.jumpForce, 0f), ForceMode.Impulse);
-                isGrounded = false;
-            }
+            //
+            // if(canJump && isGrounded && isJumping)
+            // {
+            //     rigid.linearVelocity = new Vector3(rigid.linearVelocity.x, 0f, rigid.linearVelocity.z);
+            //     rigid.AddForce(new Vector3(0f, status.jumpForce, 0f), ForceMode.Impulse);
+            //     isGrounded = false;
+            // }
         }
 
         /// <summary>
