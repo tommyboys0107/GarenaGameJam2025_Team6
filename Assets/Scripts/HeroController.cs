@@ -36,6 +36,12 @@ namespace CliffLeeCL
         [Header("Hero")]
         [SerializeField]
         private Transform itemRoot;
+        [SerializeField] 
+        private AttackRange attackRange;
+        [SerializeField] 
+        private AttackRange waterSkillRange; 
+        [SerializeField] 
+        private AttackRange powerSkillRange;
         [SerializeField]
         private float maxSaturationLevel = 100f; 
         [SerializeField]
@@ -117,6 +123,8 @@ namespace CliffLeeCL
         
         [Header("Spine")]
         [SerializeField]
+        Transform spineRoot;
+        [SerializeField]
         SkeletonAnimation spineAnimation = null;
         /// <summary>
         /// Time that transition between normalFOV to sprintFOV.
@@ -147,11 +155,13 @@ namespace CliffLeeCL
         private bool isMoving = false;
         private bool isGameOver = false;
         private bool isHoldingItem = false;
+        private bool isAttacking = false;
         private Vector3 moveVelocity = Vector3.zero;
         private Vector3 sprintVelocity = Vector3.zero;
         private float originalItemYPosition;
         private Transform interactableItemTransform;
         private AnimType curAnimType;
+        private bool IsFacingRight => moveVelocity.x > 0; 
 
         /// <summary>
         /// Start is called once on the frame when a script is enabled.
@@ -364,7 +374,7 @@ namespace CliffLeeCL
 
         public void OnAttack(InputAction.CallbackContext context)
         {
-            if (isGameOver || !context.performed) return;
+            if (isAttacking || isGameOver || !context.performed) return;
             
             if (interactableItemTransform)
             {
@@ -386,28 +396,51 @@ namespace CliffLeeCL
             }
             else
             {
-                    
+                AttackTask().Forget();
             }
+        }
+
+        private async UniTaskVoid AttackTask()
+        {
+            isAttacking = true;
+            await attackRange.StartAttack(IsFacingRight ? Vector3.right : Vector3.left);
+            isAttacking = false;
         }
 
         public void OnSkillAttack1(InputAction.CallbackContext context)
         {
-            if (isGameOver || !context.performed) return;
+            if (isAttacking || isGameOver || !context.performed) return;
             
             if (CurrentPowerEnergy > 0)
             {
-                CurrentPowerEnergy--;
+                SkillAttack1Task().Forget();
             }
         }
-
+        
+        private async UniTaskVoid SkillAttack1Task()
+        {
+            isAttacking = true;
+            CurrentPowerEnergy--;
+            await powerSkillRange.StartAttack(moveVelocity != Vector3.zero ? moveVelocity : Vector3.left);
+            isAttacking = false;
+        }
+        
         public void OnSkillAttack2(InputAction.CallbackContext context)
         {
-            if (isGameOver || !context.performed) return;
+            if (isAttacking || isGameOver || !context.performed) return;
             
             if (CurrentWaterEnergy > 0)
             {
-                CurrentWaterEnergy--;
+                SkillAttack2Task().Forget();
             }
+        }
+        
+        private async UniTaskVoid SkillAttack2Task()
+        {
+            isAttacking = true;
+            CurrentWaterEnergy--;
+            await waterSkillRange.StartAttack(IsFacingRight ? Vector3.right : Vector3.left);
+            isAttacking = false;
         }
 
         /// <summary>
