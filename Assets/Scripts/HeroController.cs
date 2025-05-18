@@ -175,6 +175,8 @@ namespace CliffLeeCL
 
             status.currentStamina = status.maxStamina;
             CurrentSaturationLevel = maxSaturationLevel;
+            CurrentWaterEnergy = maxWaterEnergy;
+            CurrentPowerEnergy = maxPowerEnergy;
         }
 
         private void OnEnable()
