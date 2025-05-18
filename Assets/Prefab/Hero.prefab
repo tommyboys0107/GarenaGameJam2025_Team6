@@ -819,9 +819,9 @@ MonoBehaviour:
   attackRange: {fileID: 6426040052322994645}
   waterSkillRange: {fileID: 7934278758012607948}
   powerSkillRange: {fileID: 5161324822422129391}
-  maxSaturationLevel: 999999
-  maxPowerEnergy: 99999
-  maxWaterEnergy: 99999
+  maxSaturationLevel: 200
+  maxPowerEnergy: 3
+  maxWaterEnergy: 3
   saturationLossPerSecond: 10
   saturationGainPerFood: 40
   checkerPositionOffset: {x: 0, y: -0.44, z: 0}
