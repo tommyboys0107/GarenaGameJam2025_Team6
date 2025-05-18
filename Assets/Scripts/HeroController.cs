@@ -1,6 +1,5 @@
 ﻿using System;
 using UnityEngine;
-using UnityEngine.Assertions;
 using System.Collections;
 using Cysharp.Threading.Tasks;
 using Sirenix.OdinInspector;
@@ -174,9 +173,7 @@ namespace CliffLeeCL
         void Start()
         {
             rigid = GetComponent<Rigidbody>();
-            Assert.IsTrue(rigid, "Need \"Rigidbody\" component on this gameObject");
             status = GetComponent<PlayerStatus>();
-            Assert.IsTrue(status, "Need \"PlayerStatus\" component on this gameObject");
 
             status.currentStamina = status.maxStamina;
             CurrentSaturationLevel = maxSaturationLevel;

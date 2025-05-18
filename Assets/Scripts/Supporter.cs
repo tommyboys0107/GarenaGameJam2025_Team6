@@ -2,7 +2,6 @@ using System;
 using System.Collections.Generic;
 using CliffLeeCL;
 using Cysharp.Threading.Tasks;
-using NUnit.Framework;
 using DG.Tweening;
 using Sirenix.OdinInspector;
 using UnityEngine;
@@ -119,9 +118,7 @@ public class Supporter : MonoBehaviour
     void Start()
     {
         rigid = GetComponent<Rigidbody>();
-        Assert.IsTrue(rigid, "Need \"Rigidbody\" component on this gameObject");
         status = GetComponent<PlayerStatus>();
-        Assert.IsTrue(status, "Need \"PlayerStatus\" component on this gameObject");
         encounterItem = null;
     }
 
