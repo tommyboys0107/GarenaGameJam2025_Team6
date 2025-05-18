@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using UnityEngine.Assertions;
+using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
 
 namespace CliffLeeCL
@@ -48,6 +49,15 @@ namespace CliffLeeCL
         /// </summary>
         void Update()
         {
+            if (Keyboard.current.digit9Key.wasPressedThisFrame)
+            {
+                BattleManager.Instance.EndBattle(true); 
+            }
+
+            if (Keyboard.current.digit0Key.wasPressedThisFrame)
+            {
+                BattleManager.Instance.EndBattle(false); 
+            }
         }
 
         /// <summary>

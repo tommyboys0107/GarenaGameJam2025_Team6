@@ -1,5 +1,9 @@
+using System;
 using UnityEngine;
 using System.Collections;
+using UnityEngine.InputSystem;
+using Random = UnityEngine.Random;
+
 public class BattleManager : MonoBehaviour
 {
     public static BattleManager Instance;
@@ -28,6 +32,19 @@ public class BattleManager : MonoBehaviour
     void Start()
     {
         StartCoroutine(BattleFlow());
+    }
+
+    private void Update()
+    {
+        if (Keyboard.current.digit9Key.wasPressedThisFrame)
+        {
+            EndBattle(true); 
+        }
+
+        if (Keyboard.current.digit0Key.wasPressedThisFrame)
+        {
+            EndBattle(false); 
+        }
     }
 
     IEnumerator BattleFlow()
