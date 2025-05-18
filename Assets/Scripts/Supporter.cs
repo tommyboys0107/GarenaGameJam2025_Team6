@@ -188,7 +188,10 @@ public class Supporter : MonoBehaviour
         else if (other.CompareTag("CraftingTable"))
         {
             craftingTable = other.GetComponent<CraftingTable>();
-            craftingTable.SetHint(true);
+            if (!craftingTable.CheckIsHold() && curOriginItem != null)
+            {
+                craftingTable.SetHint(true);
+            }
         }
     }
 
@@ -294,13 +297,13 @@ public class Supporter : MonoBehaviour
             itemParent.parent = null;
             
             // 隨機移動到附近距離單位 2 的地方
-            Vector3 randomDirection = Random.onUnitSphere;
-            randomDirection.y = 0;
-            randomDirection = randomDirection.normalized * 2;
+            Vector3 direction = moveVelocity != Vector3.zero ? moveVelocity : Vector3.back;
+            // direction.y = 0;
+            direction = direction.normalized * 2;
             Vector3 startPos = itemParent.localPosition;
             Vector3 endPos = new Vector3(startPos.x, 0, startPos.z);
-            Vector3 controlPoint = new Vector3(startPos.x + randomDirection.x / 4f, startPos.y * 1.5f, startPos.z + randomDirection.z / 4f);
-            Vector3[] path = new Vector3[] { controlPoint, endPos + randomDirection};
+            Vector3 controlPoint = new Vector3(startPos.x + direction.x / 4f, startPos.y * 1.5f, startPos.z + direction.z / 4f);
+            Vector3[] path = new Vector3[] { controlPoint, endPos + direction};
 
             float timer = 0;
             // 使用 DOTween 的 DOLocalPath 搭配動畫曲線
