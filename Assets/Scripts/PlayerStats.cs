@@ -29,7 +29,7 @@ public class PlayerStats : MonoBehaviour
             BattleManager.Instance.EndBattle(false);
     }
 
-    public void RecordDamage(int damage)
+    public void RecordBuilding(int damage)
     {
         totalBuildingBreaked++;
     }
@@ -42,7 +42,7 @@ public class PlayerStats : MonoBehaviour
     {
         totalGainedEnergy++;
     }
-    public void totalSaved()
+    public void RecordSaved()
     {
         totalSavedCleaner++;
     }

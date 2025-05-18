@@ -44,8 +44,8 @@ public class BossController : MonoBehaviour
     {
 
         currentHealth = maxHealth;
-
-        StartCoroutine(SkillRoutine());
+        CreateObstacleCircle();
+        // StartCoroutine(SkillRoutine());
     }
 
     void Update()
@@ -77,7 +77,7 @@ public class BossController : MonoBehaviour
 
     void CreateObstacleCircle()
     {
-
+        BattleManager.Instance.PlaySE(magicSE);
         for (int i = 0; i < obstacleCount; i++)
         {
             float angle = i * Mathf.PI * 2 / obstacleCount;
