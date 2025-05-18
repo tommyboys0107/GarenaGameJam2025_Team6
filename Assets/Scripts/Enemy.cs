@@ -102,7 +102,7 @@ public class Enemy : MonoBehaviour
     {
         if (!isDead && isHit && other.gameObject.CompareTag("Build"))
         {
-            var build = other.gameObject.GetComponent<Build>();
+            var build = other.transform.parent.gameObject.GetComponent<Build>();
             build?.Collapse();
             isDead = true;
             enemyObj.SetActive(false);

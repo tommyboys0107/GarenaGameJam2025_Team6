@@ -20,7 +20,10 @@ public class Build : MonoBehaviour
     public void Collapse()
     {
         build.SetActive(false);
-        item?.SetActive(true);
+        if (item != null)
+        {
+            item.SetActive(true);
+        }
     }
 
 }
