@@ -37,14 +37,14 @@ namespace CliffLeeCL
         [Header("Hero")]
         [SerializeField]
         private Transform itemRoot;
-        [SerializeField] 
+        [SerializeField]
         private AttackRange attackRange;
-        [SerializeField] 
-        private AttackRange waterSkillRange; 
-        [SerializeField] 
+        [SerializeField]
+        private AttackRange waterSkillRange;
+        [SerializeField]
         private AttackRange powerSkillRange;
         [SerializeField]
-        private float maxSaturationLevel = 100f; 
+        private float maxSaturationLevel = 100f;
         [SerializeField]
         private int maxPowerEnergy = 3;
         [SerializeField]
@@ -97,6 +97,21 @@ namespace CliffLeeCL
         {
             return maxSaturationLevel;
         }
+        public void DebugAddSatureationLevel()
+        {
+            if (currentSaturationLevel < maxSaturationLevel)
+                currentSaturationLevel += 50;
+        }
+        public void DebugAddWater()
+        {
+            if (currentWaterEnergy < 3)
+                currentWaterEnergy += 1;
+        }
+        public void DebugAddPower()
+        {
+            if (currentPowerEnergy < 3)
+                currentPowerEnergy += 1;
+        }
 
         /// <summary>
         /// Define where the checker should be relatively to player.
@@ -111,7 +126,7 @@ namespace CliffLeeCL
         /// Define how many layers the checker will check.
         /// </summary>
         public LayerMask checkLayer;
-        
+
         [Header("FOV transition")]
         /// <summary>
         /// Define normal FOV of camera.
@@ -125,7 +140,7 @@ namespace CliffLeeCL
         /// Define the transition time between FOVs.
         /// </summary>
         public float FOVTransitionTime = 0.5f;
-        
+
         [Header("Spine")]
         [SerializeField]
         Transform spineRoot;
@@ -141,7 +156,7 @@ namespace CliffLeeCL
         /// Time that transition between sprintFOV to normalFOV.
         /// </summary>
         private float sprintToNormalTime = 0.0f;
-        
+
         private Rigidbody rigid;
         /// <summary>
         /// Is used to get movement related data.
@@ -169,7 +184,7 @@ namespace CliffLeeCL
         private Transform interactableItemTransform;
         private AnimType curAnimType;
         private CraftingTable craftingTable;
-        private bool IsFacingRight => moveVelocity.x > 0; 
+        private bool IsFacingRight => moveVelocity.x > 0;
 
         /// <summary>
         /// Start is called once on the frame when a script is enabled.
@@ -200,7 +215,7 @@ namespace CliffLeeCL
         {
             isGameOver = true;
         }
-        
+
         /// <summary>
         /// Update is called every frame, if the MonoBehaviour is enabled.
         /// </summary>
@@ -212,7 +227,7 @@ namespace CliffLeeCL
             }
             UpdateSprintEffect();
             UpdateStamina();
-            
+
             if (CurrentSaturationLevel > 0)
             {
                 CurrentSaturationLevel -= saturationLossPerSecond * Time.deltaTime;
@@ -233,13 +248,13 @@ namespace CliffLeeCL
             {
                 return;
             }
-            
+
             UpdateIsGrounded();
             UpdateJump();
             if (isMoving)
             {
                 var newPosition = rigid.position + (isSprinting ? sprintVelocity : moveVelocity);
-                rigid.MovePosition(newPosition);   
+                rigid.MovePosition(newPosition);
             }
         }
 
@@ -314,7 +329,7 @@ namespace CliffLeeCL
                     Rest(status.restTimeWhenDrained).Forget();
                 }
             }
-            else if(!isDrained) // Have to rest a while if the player is drained.
+            else if (!isDrained) // Have to rest a while if the player is drained.
             {
                 if (status.currentStamina < status.maxStamina)
                     status.currentStamina += status.staminaRecoveryPerSecond * Time.deltaTime;
@@ -346,7 +361,7 @@ namespace CliffLeeCL
                 //Not good but enough.
                 Camera.main.fieldOfView = Mathf.Lerp(Camera.main.fieldOfView, sprintFOV, normalToSprintTime / FOVTransitionTime);
             }
-            else if(!isSprinting && (Camera.main.fieldOfView > normalFOV))
+            else if (!isSprinting && (Camera.main.fieldOfView > normalFOV))
             {
                 normalToSprintTime = 0.0f;
                 sprintToNormalTime += Time.deltaTime;
@@ -390,13 +405,13 @@ namespace CliffLeeCL
         public void OnAttack(InputAction.CallbackContext context)
         {
             if (isAttacking || isGameOver || !context.performed) return;
-            
+
             if (interactableItemTransform)
             {
                 if (isHoldingItem)
                 {
                     interactableItemTransform.parent = null;
-                    interactableItemTransform.transform.position = 
+                    interactableItemTransform.transform.position =
                         new Vector3(transform.position.x, originalItemYPosition, transform.position.z - 1.0f);
                     interactableItemTransform = null;
                     isHoldingItem = false;
@@ -428,13 +443,13 @@ namespace CliffLeeCL
         public void OnSkillAttack1(InputAction.CallbackContext context)
         {
             if (isAttacking || isGameOver || !context.performed) return;
-            
+
             if (CurrentPowerEnergy > 0)
             {
                 SkillAttack1Task().Forget();
             }
         }
-        
+
         private async UniTaskVoid SkillAttack1Task()
         {
             isAttacking = true;
@@ -443,17 +458,17 @@ namespace CliffLeeCL
             await powerSkillRange.StartAttack(moveVelocity != Vector3.zero ? moveVelocity : Vector3.left);
             isAttacking = false;
         }
-        
+
         public void OnSkillAttack2(InputAction.CallbackContext context)
         {
             if (isAttacking || isGameOver || !context.performed) return;
-            
+
             if (CurrentWaterEnergy > 0)
             {
                 SkillAttack2Task().Forget();
             }
         }
-        
+
         private async UniTaskVoid SkillAttack2Task()
         {
             isAttacking = true;
@@ -496,7 +511,7 @@ namespace CliffLeeCL
             Gizmos.color = Color.cyan;
             Gizmos.DrawWireSphere(transform.position + checkerPositionOffset, checkerRadius);
         }
-        
+
         [Button]
         public void ChangeAnimation(AnimType type, bool isLoop = false)
         {

@@ -6,6 +6,7 @@ using Random = UnityEngine.Random;
 
 public class BattleManager : MonoBehaviour
 {
+    [SerializeField] CliffLeeCL.HeroController hcontroller;
     public static BattleManager Instance;
     public enum BattleState { Preparation, BossFight, GameOver }
 
@@ -52,6 +53,15 @@ public class BattleManager : MonoBehaviour
         if (Keyboard.current.digit0Key.wasPressedThisFrame)
         {
             EndBattle(false); 
+        }
+        if (Keyboard.current.digit1Key.wasPressedThisFrame)
+        {
+            hcontroller.DebugAddPower();
+            hcontroller.DebugAddWater();
+        }
+        if (Keyboard.current.digit2Key.wasPressedThisFrame)
+        {
+            hcontroller.DebugAddSatureationLevel();
         }
     }
 

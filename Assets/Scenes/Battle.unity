@@ -7836,6 +7836,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 79777417a006393458728db40aa8079e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  hcontroller: {fileID: 727703879}
   preparationTime: 120
   bossPrefab: {fileID: 548519278399116877, guid: 4ac920fc48ce7974c83c41b63f8168d2, type: 3}
   heroPoint: {fileID: 819232326}
