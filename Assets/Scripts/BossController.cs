@@ -4,6 +4,7 @@ using Spine.Unity;
 using System.Collections;
 using Cysharp.Threading.Tasks;
 using Sirenix.OdinInspector;
+using UnityEngine.InputSystem;
 public class BossController : MonoBehaviour
 {
     [Header("Movement")]
@@ -57,6 +58,10 @@ public class BossController : MonoBehaviour
 
     void Update()
     {
+        if (Keyboard.current.digit8Key.wasPressedThisFrame)
+        {
+            TestDamage(50); 
+        }
         if (!isStunned && !isAttack)
         {
             float distance = Vector3.Distance(transform.position, BattleManager.Instance.heroPoint.position);
@@ -102,6 +107,16 @@ public class BossController : MonoBehaviour
         if (obstacleCollisionCount < 3) return;
 
         currentHealth = Mathf.Max(0, currentHealth - hitDamage);
+        BattleManager.Instance.HitSE();
+        BattleUIManager.Instance.bossHealthBar.fillAmount = Mathf.Clamp01(currentHealth / maxHealth);
+        if (currentHealth <= 0)
+        {
+            BattleManager.Instance.EndBattle(true);
+        }
+    }
+    public void TestDamage(float damage)
+    {
+        currentHealth = Mathf.Max(0, currentHealth - damage);
         BattleManager.Instance.HitSE();
         BattleUIManager.Instance.bossHealthBar.fillAmount = Mathf.Clamp01(currentHealth / maxHealth);
         if (currentHealth <= 0)
