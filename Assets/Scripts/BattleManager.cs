@@ -107,6 +107,6 @@ public class BattleManager : MonoBehaviour
         
         // 展示結算面板
         BattleUIManager.Instance.ShowResultPanel(isVictory);
-        Time.timeScale = 0f; // 暫停遊戲邏輯
+        // Time.timeScale = 0f; // 暫停遊戲邏輯
     }
 }

@@ -93,6 +93,10 @@ namespace CliffLeeCL
                 }
             }
         }
+        public float GetCurrentMaxSaturationLevel()
+        {
+            return maxSaturationLevel;
+        }
 
         /// <summary>
         /// Define where the checker should be relatively to player.

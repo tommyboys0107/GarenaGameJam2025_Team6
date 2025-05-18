@@ -5,6 +5,7 @@ using TMPro;
 public class BattleUIManager : MonoBehaviour
 {
     public static BattleUIManager Instance;
+    [SerializeField] CliffLeeCL.HeroController hcontroller;
     [Header("Battle HUD")]
     public Slider healthSlider;
     public Text timerText;
@@ -78,7 +79,7 @@ public class BattleUIManager : MonoBehaviour
     }
     void UpdateSaturationLevel(float saturationLevel)
     {
-        heroHealthFillImage.fillAmount = Mathf.Clamp01(saturationLevel / playerMaxHealth);
+        heroHealthFillImage.fillAmount = Mathf.Clamp01(saturationLevel / hcontroller.GetCurrentMaxSaturationLevel());
     }
     void UpdatePowerEnergy(int currentPowerEnergy)
     {

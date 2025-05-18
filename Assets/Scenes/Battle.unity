@@ -3469,6 +3469,17 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 52ee3eb4d5b14644a9bb89b91dce99bc, type: 3}
+--- !u!114 &727703879 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2209930723708728719, guid: 52ee3eb4d5b14644a9bb89b91dce99bc, type: 3}
+  m_PrefabInstance: {fileID: 727703878}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 96033e782e4b8c842a4f3d040bd8a4eb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &737399524
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -7779,6 +7790,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 296c4383ebd698b4eb4280d9ad80b5aa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  hcontroller: {fileID: 727703879}
   healthSlider: {fileID: 0}
   timerText: {fileID: 0}
   bossHealthPanel: {fileID: 667255834}
