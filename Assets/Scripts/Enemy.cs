@@ -98,14 +98,17 @@ public class Enemy : MonoBehaviour
         }
     }
 
-    void OnTriggerEnter(Collider other)
+    void OnCollisionEnter(Collision other)
     {
-        if (!isDead && isHit && other.CompareTag("Build"))
+        if (!isDead && isHit && other.gameObject.CompareTag("Build"))
         {
+            var build = other.gameObject.GetComponent<Build>();
+            build?.Collapse();
             isDead = true;
             enemyObj.SetActive(false);
             deadBodyObj.SetActive(true);
             Debug.Log("[Enemy] Break down!");
+            GetComponent<Rigidbody>().isKinematic = true;
         }
     }
 

@@ -18,7 +18,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8412331605094894342, guid: 17bbbc925377ea14f96b3a1a9446ddd7, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: -6.6
       objectReference: {fileID: 0}
     - target: {fileID: 8412331605094894342, guid: 17bbbc925377ea14f96b3a1a9446ddd7, type: 3}
       propertyPath: m_LocalPosition.y
@@ -58,11 +58,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8519430698638072287, guid: 17bbbc925377ea14f96b3a1a9446ddd7, type: 3}
       propertyPath: m_Name
-      value: PowerEnergy Variant
+      value: PowerEnergy
+      objectReference: {fileID: 0}
+    - target: {fileID: 9112467950940502369, guid: 17bbbc925377ea14f96b3a1a9446ddd7, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 5814647547617694535, guid: 313a11d14cd8afa4b95ff73e25b7b384, type: 3}
+    - target: {fileID: 9112467950940502369, guid: 17bbbc925377ea14f96b3a1a9446ddd7, type: 3}
+      propertyPath: m_Color.b
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 9112467950940502369, guid: 17bbbc925377ea14f96b3a1a9446ddd7, type: 3}
       propertyPath: m_Color.g
-      value: 0.94818664
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

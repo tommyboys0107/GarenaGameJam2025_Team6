@@ -8,16 +8,16 @@ public class Build : MonoBehaviour
     GameObject build = null;
     [SerializeField]
     GameObject item = null;
-    void OnCollisionEnter(Collision other)
-    {
-        if (other.gameObject.CompareTag("Enemy"))
-        {
-            Collapse();
-        }
-    }
+    // void OnCollisionEnter(Collision other)
+    // {
+    //     if (other.gameObject.CompareTag("Enemy"))
+    //     {
+    //         Collapse();
+    //     }
+    // }
 
     [Button]
-    void Collapse()
+    public void Collapse()
     {
         build.SetActive(false);
         item?.SetActive(true);

@@ -16,9 +16,13 @@ PrefabInstance:
       propertyPath: m_TagString
       value: WaterEnergy
       objectReference: {fileID: 0}
+    - target: {fileID: 5220314327793447137, guid: 17bbbc925377ea14f96b3a1a9446ddd7, type: 3}
+      propertyPath: m_IsTrigger
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8412331605094894342, guid: 17bbbc925377ea14f96b3a1a9446ddd7, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: -8
       objectReference: {fileID: 0}
     - target: {fileID: 8412331605094894342, guid: 17bbbc925377ea14f96b3a1a9446ddd7, type: 3}
       propertyPath: m_LocalPosition.y
@@ -59,6 +63,18 @@ PrefabInstance:
     - target: {fileID: 8519430698638072287, guid: 17bbbc925377ea14f96b3a1a9446ddd7, type: 3}
       propertyPath: m_Name
       value: WaterEnergy
+      objectReference: {fileID: 0}
+    - target: {fileID: 9112467950940502369, guid: 17bbbc925377ea14f96b3a1a9446ddd7, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 4350567507291486614, guid: bc4e035287c5d304c88a3093a4c7cb47, type: 3}
+    - target: {fileID: 9112467950940502369, guid: 17bbbc925377ea14f96b3a1a9446ddd7, type: 3}
+      propertyPath: m_Color.b
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 9112467950940502369, guid: 17bbbc925377ea14f96b3a1a9446ddd7, type: 3}
+      propertyPath: m_Color.g
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
