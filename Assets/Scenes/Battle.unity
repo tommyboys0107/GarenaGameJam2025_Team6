@@ -1216,6 +1216,8 @@ MonoBehaviour:
   grayEnergyIcon: {fileID: 201395692750476153, guid: 6def1f01d0cd892429601ab36e2f6546, type: 3}
   normalWaterIcon: {fileID: 4978403346365414471, guid: 0ad065bebe32725468b4a8899c7ed047, type: 3}
   normalEnergyIcon: {fileID: 1185856871112690257, guid: 8ad40d1265777e148a4dcef87d7731e3, type: 3}
+  heroHealthFillImage: {fileID: 4507581211569520427}
+  playerMaxHealth: 200
   victorySprite: {fileID: -7642986446173420197, guid: fca50c9bf63cc764499cc5bc184d9726, type: 3}
   loseSprite: {fileID: -8557816031639189491, guid: 82bfcda5a031c544a9d8331a9436027a, type: 3}
   vTitleImage: {fileID: 1731637774}
@@ -1929,6 +1931,17 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: dedbe1baba84805418817214d5479e65, type: 3}
+--- !u!114 &4507581211569520427 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8265922249095568198, guid: dedbe1baba84805418817214d5479e65, type: 3}
+  m_PrefabInstance: {fileID: 4507581211569520426}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &4851477599712727216
 PrefabInstance:
   m_ObjectHideFlags: 0

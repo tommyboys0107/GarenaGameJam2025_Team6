@@ -18,7 +18,8 @@ public class BattleUIManager : MonoBehaviour
     [SerializeField] Sprite grayEnergyIcon;
     [SerializeField] Sprite normalWaterIcon;
     [SerializeField] Sprite normalEnergyIcon;
-
+    [SerializeField] Image heroHealthFillImage;
+    [SerializeField] float playerMaxHealth = 200f;
 
     [Header("Result Panel")]
     [SerializeField] Sprite victorySprite;
@@ -44,11 +45,13 @@ public class BattleUIManager : MonoBehaviour
         bossHealthPanel.SetActive(false);
         CliffLeeCL.EventManager.Instance.onWaterEnergyChanged += UpdateWaterEnergy;
         CliffLeeCL.EventManager.Instance.onPowerEnergyChanged += UpdatePowerEnergy;
+        CliffLeeCL.EventManager.Instance.onSaturationLevelChanged += UpdateSaturationLevel;
     }
     void OnDestroy()
     {
         CliffLeeCL.EventManager.Instance.onWaterEnergyChanged -= UpdateWaterEnergy;
         CliffLeeCL.EventManager.Instance.onPowerEnergyChanged -= UpdatePowerEnergy;
+        CliffLeeCL.EventManager.Instance.onSaturationLevelChanged -= UpdateSaturationLevel;
     }
 
     public void UpdateHealthBar(int health)
@@ -72,6 +75,10 @@ public class BattleUIManager : MonoBehaviour
         {
             waterEnergyIcon.sprite = normalWaterIcon;
         }
+    }
+    void UpdateSaturationLevel(float saturationLevel)
+    {
+        heroHealthFillImage.fillAmount = Mathf.Clamp01(saturationLevel / playerMaxHealth);
     }
     void UpdatePowerEnergy(int currentPowerEnergy)
     {
