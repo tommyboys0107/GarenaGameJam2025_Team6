@@ -28,6 +28,7 @@ public class BossController : MonoBehaviour
     [SerializeField]
     int obstacleCollisionCount;
     bool isStunned;
+    bool isHitFly;
     [SerializeField] SpriteRenderer bossSpriteRenderer;
     [SerializeField] Sprite normalBossImage;
     [SerializeField] Sprite stunnedBossImage;
@@ -74,7 +75,7 @@ public class BossController : MonoBehaviour
             CreateObstacleCircle();
         }
     }
-
+    [Button]
     void CreateObstacleCircle()
     {
         BattleManager.Instance.PlaySE(magicSE);
@@ -110,7 +111,10 @@ public class BossController : MonoBehaviour
         if (isStunned)
             TakeDamage();
         else
+        {
+            isHitFly = true;
             StartCoroutine(ShowHitAnimAndMove());
+        }
     }
 
     IEnumerator ShowHitAnimAndMove()
@@ -120,6 +124,7 @@ public class BossController : MonoBehaviour
         HitMove().Forget();
 
         yield return new WaitForSeconds(breakTime);
+        isHitFly = false;
     }
 
     public async UniTaskVoid HitMove()
@@ -127,7 +132,8 @@ public class BossController : MonoBehaviour
         // 計算目標位置（反向移動 hitDistance）
         Vector3 start = transform.localPosition;
         Vector3 end = start - (BattleManager.Instance.heroPoint.position - transform.position).normalized * hitDistance;
-        end.y = 1f;
+        // 後續會使用物理的話，則不需要透過座標固定。
+        // end.y = 1f;
 
         float timer = 0f;
 
@@ -141,16 +147,16 @@ public class BossController : MonoBehaviour
         }
     }
 
-    void OnTriggerEnter(Collider collision)
+    void OnCollisionEnter(Collision collision)
     {
         Debug.Log("[Boss] enter OnTriggerEnter" + collision.gameObject);
-        if (collision.CompareTag("Build"))
+        if (collision.gameObject.CompareTag("Build") && isHitFly)
         {
             Debug.Log("[Boss] enter build");
             obstacleCollisionCount++;
 
-            // 觸發破壞建築
-            BreakBuilding(collision.gameObject);
+            // 觸發破壞建築(改到建築物端製作)
+            // BreakBuilding(collision.gameObject);
 
             if (obstacleCollisionCount == 3 && !isStunned)
             {

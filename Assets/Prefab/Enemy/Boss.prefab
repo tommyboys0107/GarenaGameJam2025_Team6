@@ -61,8 +61,8 @@ Transform:
   m_GameObject: {fileID: 7961737635758174275}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: 0, y: 3.5, z: 0}
+  m_LocalScale: {x: 0.7, y: 0.7, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 4375355273850855401}
@@ -79,15 +79,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dd6e1850189da7e4792061b76901d76b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 0}
   followSpeed: 3.5
   skillCooldown: 10
-  speed: 3
   stopDistance: 2
   hitDistance: 5
   hitDuration: 1
   obstacleCount: 50
-  radius: 7
+  radius: 8.5
   obstaclePrefab: {fileID: 8242078466828642764, guid: d3167c9eadf9c604b991b78915f3f294, type: 3}
   maxHealth: 500
   stunDuration: 2
@@ -95,12 +93,11 @@ MonoBehaviour:
   hitDamage: 10
   obstacleCollisionCount: 0
   bossSpriteRenderer: {fileID: 9117383129108168541}
-  normalBossImage: {fileID: 8596640243658272642, guid: 7248916b0f6737540bdd68f3d8e40967, type: 3}
+  normalBossImage: {fileID: 2520960085839038117, guid: a6983cab536647848a1a77f70ba96898, type: 3}
   stunnedBossImage: {fileID: 8723349686400296270, guid: 44a9a0d7ed4f3474b936e3d8b936ca48, type: 3}
   StunSE: {fileID: 8300000, guid: 8d5127a97b1d1024698c90b060ea34ab, type: 3}
   magicSE: {fileID: 8300000, guid: 4ff700487e783ea4c8017d5bb37afe52, type: 3}
   buildingExplodeSE: {fileID: 8300000, guid: f718613c7a360104b9668bbe15b1e8f9, type: 3}
-  fillImage: {fileID: 0}
 --- !u!212 &9117383129108168541
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -145,7 +142,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 8596640243658272642, guid: 7248916b0f6737540bdd68f3d8e40967, type: 3}
+  m_Sprite: {fileID: 2520960085839038117, guid: a6983cab536647848a1a77f70ba96898, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
