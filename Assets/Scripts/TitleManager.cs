@@ -12,7 +12,7 @@ public class TitleManager : MonoBehaviour
 
     public void CloseCredits()
     {
-        credit.SetActive(true);
+        credit.SetActive(false);
         
     }
 
