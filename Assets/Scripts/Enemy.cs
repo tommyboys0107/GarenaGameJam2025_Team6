@@ -105,6 +105,7 @@ public class Enemy : MonoBehaviour
             var build = other.transform.parent.gameObject.GetComponent<Build>();
             build?.Collapse();
             isDead = true;
+            PlayerStats.Instance.RecordKill();
             enemyObj.SetActive(false);
             deadBodyObj.SetActive(true);
             Debug.Log("[Enemy] Break down!");

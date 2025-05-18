@@ -67,10 +67,12 @@ public class CraftingTable : MonoBehaviour
             case Item.ItemType.Water:
                 var energy1 = Instantiate(waterEnergyPrefab).transform;
                 CreateNewItem(energy1);
+                PlayerStats.Instance.RecordEnergy();
                 break;
             case Item.ItemType.Power:
                 var energy2 = Instantiate(powerEnergyPrefab).transform;
                 CreateNewItem(energy2);
+                PlayerStats.Instance.RecordEnergy();
                 break;
             default:
                 throw new ArgumentOutOfRangeException();

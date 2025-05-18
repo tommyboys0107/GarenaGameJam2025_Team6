@@ -29,7 +29,7 @@ public class PlayerStats : MonoBehaviour
             BattleManager.Instance.EndBattle(false);
     }
 
-    public void RecordBuilding(int damage)
+    public void RecordBuilding()
     {
         totalBuildingBreaked++;
     }

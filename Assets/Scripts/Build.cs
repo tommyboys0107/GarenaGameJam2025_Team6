@@ -20,6 +20,7 @@ public class Build : MonoBehaviour
     public void Collapse()
     {
         build.SetActive(false);
+        PlayerStats.Instance.RecordBuilding();
         if (item != null)
         {
             item.SetActive(true);
