@@ -1152,6 +1152,16 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 3010722220417622296, guid: 9758f1f15354ee64db4f23f0898462bb, type: 3}
   m_PrefabInstance: {fileID: 1731637771}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1731637773 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5017705000046455357, guid: 9758f1f15354ee64db4f23f0898462bb, type: 3}
+  m_PrefabInstance: {fileID: 1731637771}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &1731637774 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5557991677238744235, guid: 9758f1f15354ee64db4f23f0898462bb, type: 3}
+  m_PrefabInstance: {fileID: 1731637771}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1763787790 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 4053369975251478315, guid: dedbe1baba84805418817214d5479e65, type: 3}
@@ -1208,8 +1218,8 @@ MonoBehaviour:
   normalEnergyIcon: {fileID: 1185856871112690257, guid: 8ad40d1265777e148a4dcef87d7731e3, type: 3}
   victorySprite: {fileID: -7642986446173420197, guid: fca50c9bf63cc764499cc5bc184d9726, type: 3}
   loseSprite: {fileID: -8557816031639189491, guid: 82bfcda5a031c544a9d8331a9436027a, type: 3}
-  vTitleImage: {fileID: 0}
-  lTitleImage: {fileID: 0}
+  vTitleImage: {fileID: 1731637774}
+  lTitleImage: {fileID: 1731637773}
   resultPanel: {fileID: 778586798}
   titleText: {fileID: 880887203}
   heroResultText: {fileID: 618546687}
