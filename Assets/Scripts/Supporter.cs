@@ -1,6 +1,8 @@
 using System;
 using System.Collections.Generic;
 using CliffLeeCL;
+using Cysharp.Threading.Tasks;
+using NUnit.Framework;
 using Sirenix.OdinInspector;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -92,6 +94,7 @@ public class Supporter : MonoBehaviour
 
     bool isMoving = false;
     bool isinteractive = false;
+    private bool isGameOver = false;
     Vector3 moveVelocity = Vector3.zero;
     Vector3 sprintVelocity = Vector3.zero;
 
@@ -108,9 +111,61 @@ public class Supporter : MonoBehaviour
 
     void Start()
     {
+        rigid = GetComponent<Rigidbody>();
+        Assert.IsTrue(rigid, "Need \"Rigidbody\" component on this gameObject");
+        status = GetComponent<PlayerStatus>();
+        Assert.IsTrue(status, "Need \"PlayerStatus\" component on this gameObject");
         encounterItem = null;
     }
 
+    private void OnEnable()
+    {
+        EventManager.Instance.onGameOver += OnGameOver;
+    }
+
+
+    private void OnDisable()
+    {
+        EventManager.Instance.onGameOver -= OnGameOver;
+    }
+
+    private void OnGameOver()
+    {
+        isGameOver = true;
+    }
+        
+    /// <summary>
+    /// Update is called every frame, if the MonoBehaviour is enabled.
+    /// </summary>
+    private void Update()
+    {
+        if (isGameOver)
+        {
+            return;
+        }
+        UpdateSprintEffect();
+        UpdateStamina();
+    }
+
+    /// <summary>
+    /// This function is called every fixed framerate frame, if the MonoBehaviour is enabled.
+    /// </summary>
+    private void FixedUpdate()
+    {
+        if (isGameOver)
+        {
+            return;
+        }
+            
+        UpdateIsGrounded();
+        UpdateJump();
+        if (isMoving)
+        {
+            var newPosition = rigid.position + (isSprinting ? sprintVelocity : moveVelocity);
+            rigid.MovePosition(newPosition);   
+        }
+    }
+    
     void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Item"))
@@ -216,4 +271,90 @@ public class Supporter : MonoBehaviour
     }
 
 
+    /// <summary>
+    /// The function is used to emit sprint effect paticle when the player is sprinting.
+    /// </summary>
+    private void UpdateSprintEffect()
+    {
+        if (isSprinting)
+        {
+            if (sprintEffect)
+                sprintEffect.Play();
+        }
+        else
+        {
+            if (sprintEffect)
+                sprintEffect.Stop();
+        }
+    }
+
+    /// <summary>
+    /// Recover or decrease player's stamina in conditions.
+    /// </summary>
+    private void UpdateStamina()
+    {
+        if (isSprinting)
+        {
+            if (status.currentStamina > 0.0f)
+                status.currentStamina -= status.staminaLossPerSecond * Time.deltaTime;
+            else
+            {
+                status.currentStamina = 0.0f;
+                isDrained = true;
+                isSprinting = false;
+                Rest(status.restTimeWhenDrained).Forget();
+            }
+        }
+        else if(!isDrained) // Have to rest a while if the player is drained.
+        {
+            if (status.currentStamina < status.maxStamina)
+                status.currentStamina += status.staminaRecoveryPerSecond * Time.deltaTime;
+            else
+                status.currentStamina = status.maxStamina;
+        }
+    }
+
+    /// <summary>
+    /// Coroutine that will makes the player to wait for restTime to recover its stamina.
+    /// </summary>
+    /// <param name="restTime">The time the player needs to rest.</param>
+    /// <returns>Interface that all coroutines use.</returns>
+    private async UniTaskVoid Rest(float restTime)
+    {
+        await UniTask.WaitForSeconds(restTime);
+        isDrained = false;
+    }
+    /// <summary>
+    /// Check whether the player is grounded.
+    /// </summary>
+    private void UpdateIsGrounded()
+    {
+        if (Physics.CheckSphere(transform.position + checkerPositionOffset, checkerRadius, checkLayer, QueryTriggerInteraction.Ignore))
+            isGrounded = true;
+        else
+            isGrounded = false;
+    }
+
+    /// <summary>
+    /// Update player's jump via adding impulse force.
+    /// </summary>
+    private void UpdateJump()
+    {
+        //
+        // if(canJump && isGrounded && isJumping)
+        // {
+        //     rigid.linearVelocity = new Vector3(rigid.linearVelocity.x, 0f, rigid.linearVelocity.z);
+        //     rigid.AddForce(new Vector3(0f, status.jumpForce, 0f), ForceMode.Impulse);
+        //     isGrounded = false;
+        // }
+    }
+
+    /// <summary>
+    /// Implement this OnDrawGizmosSelected if you want to draw gizmos only if the object is selected.
+    /// </summary>
+    void OnDrawGizmosSelected()
+    {
+        Gizmos.color = Color.cyan;
+        Gizmos.DrawWireSphere(transform.position + checkerPositionOffset, checkerRadius);
+    }
 }

@@ -127,17 +127,21 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1789580179}
     m_Modifications:
+    - target: {fileID: 759910271069788145, guid: 86f1801624e851345ab4bdffb355f12f, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4511240569615302677, guid: 86f1801624e851345ab4bdffb355f12f, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4511240569615302677, guid: 86f1801624e851345ab4bdffb355f12f, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 17
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4511240569615302677, guid: 86f1801624e851345ab4bdffb355f12f, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 26.2
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4511240569615302677, guid: 86f1801624e851345ab4bdffb355f12f, type: 3}
       propertyPath: m_LocalRotation.w
@@ -170,6 +174,10 @@ PrefabInstance:
     - target: {fileID: 6063927225596538746, guid: 86f1801624e851345ab4bdffb355f12f, type: 3}
       propertyPath: m_Name
       value: SupporterWallEast
+      objectReference: {fileID: 0}
+    - target: {fileID: 6063927225596538746, guid: 86f1801624e851345ab4bdffb355f12f, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -495,11 +503,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1868437926389014416, guid: 631ee29629259ae4293595583abb4e1e, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: 17
       objectReference: {fileID: 0}
     - target: {fileID: 1868437926389014416, guid: 631ee29629259ae4293595583abb4e1e, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0
+      value: 26.2
       objectReference: {fileID: 0}
     - target: {fileID: 1868437926389014416, guid: 631ee29629259ae4293595583abb4e1e, type: 3}
       propertyPath: m_LocalRotation.w
@@ -532,6 +540,14 @@ PrefabInstance:
     - target: {fileID: 4602193206351866793, guid: 631ee29629259ae4293595583abb4e1e, type: 3}
       propertyPath: m_Name
       value: SupporterWallNorth
+      objectReference: {fileID: 0}
+    - target: {fileID: 4602193206351866793, guid: 631ee29629259ae4293595583abb4e1e, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6496661154094196332, guid: 631ee29629259ae4293595583abb4e1e, type: 3}
+      propertyPath: m_Enabled
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -573,6 +589,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1789580179}
     m_Modifications:
+    - target: {fileID: 2954869117399938012, guid: 3b1ed12efb9978440b59be573cfa88f6, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5250165666376921600, guid: 3b1ed12efb9978440b59be573cfa88f6, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -616,6 +636,10 @@ PrefabInstance:
     - target: {fileID: 5465536346418480074, guid: 3b1ed12efb9978440b59be573cfa88f6, type: 3}
       propertyPath: m_Name
       value: SupporterWallSouth
+      objectReference: {fileID: 0}
+    - target: {fileID: 5465536346418480074, guid: 3b1ed12efb9978440b59be573cfa88f6, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -662,6 +686,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2209930723708728719, guid: 52ee3eb4d5b14644a9bb89b91dce99bc, type: 3}
+      propertyPath: maxSaturationLevel
+      value: 999999
+      objectReference: {fileID: 0}
     - target: {fileID: 4233096486313289635, guid: 52ee3eb4d5b14644a9bb89b91dce99bc, type: 3}
       propertyPath: m_Name
       value: Hero
@@ -748,6 +776,14 @@ PrefabInstance:
     - target: {fileID: 3340556211326894479, guid: 3a341ae5c99cd6c48b79c8a1c32569fd, type: 3}
       propertyPath: m_Name
       value: SupporterWallWest
+      objectReference: {fileID: 0}
+    - target: {fileID: 3340556211326894479, guid: 3a341ae5c99cd6c48b79c8a1c32569fd, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4151528891768311608, guid: 3a341ae5c99cd6c48b79c8a1c32569fd, type: 3}
+      propertyPath: m_Enabled
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5753846902379462165, guid: 3a341ae5c99cd6c48b79c8a1c32569fd, type: 3}
       propertyPath: m_LocalPosition.x
@@ -1835,10 +1871,6 @@ PrefabInstance:
     - target: {fileID: 4226953045944851015, guid: 81b6c0d6628bb344d827e22873d987f1, type: 3}
       propertyPath: m_Name
       value: Support
-      objectReference: {fileID: 0}
-    - target: {fileID: 4226953045944851015, guid: 81b6c0d6628bb344d827e22873d987f1, type: 3}
-      propertyPath: m_IsActive
-      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8473809592109526462, guid: 81b6c0d6628bb344d827e22873d987f1, type: 3}
       propertyPath: m_LocalPosition.x
