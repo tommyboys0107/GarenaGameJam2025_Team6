@@ -669,7 +669,7 @@ MonoBehaviour:
   normalFOV: 60
   sprintFOV: 65
   FOVTransitionTime: 0.5
-  spineRoot: {fileID: 0}
+  spineRoot: {fileID: 4028394710497864981}
   spineAnimation: {fileID: 675751741135576899}
 --- !u!114 &8822103877929108749
 MonoBehaviour:
@@ -1068,7 +1068,7 @@ MonoBehaviour:
   physicsMovementRelativeTo: {fileID: 0}
   updateTiming: 1
   unscaledTime: 0
-  _animationName: 
+  _animationName: magic01
   loop: 0
   timeScale: 1
 --- !u!1 &4804594864095152389
