@@ -183,19 +183,8 @@ public class Supporter : MonoBehaviour
         if (context.performed)
         {
             isinteractive = true;
-            if (encounterItem != null)
-            {
-                encounterItem.PlayerGetItem();
-                encounterItem.transform.parent.parent = itemRoot;
-                encounterItem.transform.parent.localPosition = Vector3.zero;
-                curItem = encounterItem;
-                encounterItem = null;
-            }
-            else if (craftingTable != null && curItem != null)
-            {
-                craftingTable.CraftItem(curItem);
-                curItem = null;
-            }
+            InteractObj();
+
         }
         else
         {
@@ -206,6 +195,11 @@ public class Supporter : MonoBehaviour
     [Button]
     public void AttackTest()
     {
+        InteractObj();
+    }
+
+    void InteractObj()
+    {
         if (encounterItem != null)
         {
             encounterItem.PlayerGetItem();
@@ -214,7 +208,7 @@ public class Supporter : MonoBehaviour
             curItem = encounterItem;
             encounterItem = null;
         }
-        else if (craftingTable != null && curItem != null)
+        else if (craftingTable != null && !craftingTable.CheckIsHold() && curItem != null)
         {
             craftingTable.CraftItem(curItem);
             curItem = null;

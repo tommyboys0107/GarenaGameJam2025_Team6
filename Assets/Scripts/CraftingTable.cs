@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using DG.Tweening;
 using UnityEngine;
+using UnityEngine.Serialization;
 using Random = UnityEngine.Random;
 
 public class CraftingTable : MonoBehaviour
@@ -10,11 +11,12 @@ public class CraftingTable : MonoBehaviour
     [SerializeField]
     GameObject foodPrefab = null;
     [SerializeField]
-    GameObject skillEnergy1Prefab = null;
+    GameObject waterEnergyPrefab = null;
     [SerializeField]
-    GameObject skillEnergy2Prefab = null;
+    GameObject powerEnergyPrefab = null;
 
     float duration = 1.0f;
+    bool isHold = false;
     bool isUsing = false;
     Item.ItemType itemType;
 
@@ -60,11 +62,11 @@ public class CraftingTable : MonoBehaviour
                 CreateNewItem(food);
                 break;
             case Item.ItemType.Water:
-                var energy1 = Instantiate(skillEnergy1Prefab).transform;
+                var energy1 = Instantiate(waterEnergyPrefab).transform;
                 CreateNewItem(energy1);
                 break;
             case Item.ItemType.Power:
-                var energy2 = Instantiate(skillEnergy2Prefab).transform;
+                var energy2 = Instantiate(powerEnergyPrefab).transform;
                 CreateNewItem(energy2);
                 break;
             default:
@@ -87,5 +89,16 @@ public class CraftingTable : MonoBehaviour
         newItem.DOLocalPath(path, duration, PathType.CatmullRom).SetEase(Ease.OutQuad);
         newItem.DOScale(Vector3.one, duration * 0.33f);
     }
+
+    public void HeroHoldItem(bool isHold)
+    {
+        this.isHold = isHold;
+    }
+
+    public bool CheckIsHold()
+    {
+        return isHold;
+    }
+
 
 }

@@ -12,6 +12,9 @@ public class Item : MonoBehaviour
         DeadBody,
         Water,
         Power,
+        Food,
+        WaterEnergy,
+        PowerEnergy,
     }
     
     [SerializeField]

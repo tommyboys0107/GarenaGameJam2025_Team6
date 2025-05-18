@@ -32,7 +32,7 @@ public class Enemy : MonoBehaviour
 
     void Start()
     {
-        player = GameObject.Find("Player").transform;
+        player = GameObject.FindWithTag("Player").transform;
         enemyObj.SetActive(true);
         deadBodyObj.SetActive(false);
     }

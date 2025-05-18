@@ -232,6 +232,8 @@ namespace CliffLeeCL
             }
             else if (other.CompareTag("CraftingTable"))
             {
+                var craftingTable = other.GetComponent<CraftingTable>();
+                craftingTable.HeroHoldItem(true);
                 interactableItemTransform = other.transform.parent;
             }
         }
@@ -240,6 +242,8 @@ namespace CliffLeeCL
         {
             if (other.CompareTag("CraftingTable"))
             {
+                var craftingTable = other.GetComponent<CraftingTable>();
+                craftingTable.HeroHoldItem(false);
                 interactableItemTransform = null;
             }
         }

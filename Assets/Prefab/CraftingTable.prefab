@@ -123,8 +123,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   foodPrefab: {fileID: 8519430698638072287, guid: 17bbbc925377ea14f96b3a1a9446ddd7, type: 3}
-  skillEnergy1Prefab: {fileID: 8519430698638072287, guid: 17bbbc925377ea14f96b3a1a9446ddd7, type: 3}
-  skillEnergy2Prefab: {fileID: 8519430698638072287, guid: 17bbbc925377ea14f96b3a1a9446ddd7, type: 3}
+  waterEnergyPrefab: {fileID: 8646549910824878523, guid: a0112038659b4834e9f402ea6be947d8, type: 3}
+  powerEnergyPrefab: {fileID: 590182537215951464, guid: e63c1fc31125614478c47fa408b7c9fb, type: 3}
 --- !u!1 &5087915073480714231
 GameObject:
   m_ObjectHideFlags: 0
