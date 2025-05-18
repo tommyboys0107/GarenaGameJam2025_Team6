@@ -938,14 +938,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damage: 0
-  pushForce: 1
+  pushForce: 1.5
   colliderObj: {fileID: 4804594864095152389}
-  delayOpenRangeTime: 0.1
-  rangeOpenDuration: 0.3
+  delayOpenRangeTime: 0.3
+  rangeOpenDuration: 0.1
   enableCameraShake: 1
-  cameraShakeAmplitude: 0.5
-  cameraShakeFrequency: 0.5
-  cameraShakeDuration: 0.5
+  cameraShakeAmplitude: 0.3
+  cameraShakeFrequency: 0
+  cameraShakeDuration: 0.1
 --- !u!54 &7004696343158523855
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -1131,8 +1131,8 @@ Transform:
   m_GameObject: {fileID: 4804594864095152389}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 1}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: 0, y: 0.65, z: 2.6}
+  m_LocalScale: {x: 2, y: 2, z: 2}
   m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 6229796873364678040}
