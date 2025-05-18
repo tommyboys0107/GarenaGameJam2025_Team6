@@ -4,6 +4,7 @@ using UnityEngine.Assertions;
 using System.Collections;
 using Cysharp.Threading.Tasks;
 using Sirenix.OdinInspector;
+using Spine.Unity;
 using UnityEngine.InputSystem;
 
 namespace CliffLeeCL
@@ -13,6 +14,12 @@ namespace CliffLeeCL
     /// </summary>
     public class HeroController : MonoBehaviour
     {
+        public enum AnimType
+        {
+            attack,
+            magic01,
+            run,
+        }
         /// <summary>
         /// Decide whether the player can sprint or not.
         /// </summary>
@@ -107,6 +114,10 @@ namespace CliffLeeCL
         /// Define the transition time between FOVs.
         /// </summary>
         public float FOVTransitionTime = 0.5f;
+        
+        [Header("Spine")]
+        [SerializeField]
+        SkeletonAnimation spineAnimation = null;
         /// <summary>
         /// Time that transition between normalFOV to sprintFOV.
         /// </summary>
@@ -140,7 +151,8 @@ namespace CliffLeeCL
         private Vector3 sprintVelocity = Vector3.zero;
         private float originalItemYPosition;
         private Transform interactableItemTransform;
-        
+        private AnimType curAnimType;
+
         /// <summary>
         /// Start is called once on the frame when a script is enabled.
         /// </summary>
@@ -431,5 +443,13 @@ namespace CliffLeeCL
             Gizmos.color = Color.cyan;
             Gizmos.DrawWireSphere(transform.position + checkerPositionOffset, checkerRadius);
         }
+        
+        [Button]
+        public void ChangeAnimation(AnimType type, bool isLoop = false)
+        {
+            curAnimType = type;
+            spineAnimation.state.SetAnimation(0, type.ToString(), isLoop);
+        }
+
     }
 }

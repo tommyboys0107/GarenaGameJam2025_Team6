@@ -1,0 +1,23 @@
+HERO.png
+size:1200,436
+filter:Linear,Linear
+pma:true
+右手
+bounds:991,36,92,114
+右腳
+bounds:924,5,65,145
+圖層 1
+bounds:777,18,416,85
+rotate:90
+圖層 2
+bounds:2,3,431,414
+rotate:90
+左手
+bounds:1085,40,110,113
+rotate:90
+左腳
+bounds:864,2,58,148
+橢圓 1
+bounds:864,152,284,282
+身體
+bounds:418,4,357,430

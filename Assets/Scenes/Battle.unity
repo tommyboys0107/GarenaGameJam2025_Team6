@@ -686,9 +686,9 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 2209930723708728719, guid: 52ee3eb4d5b14644a9bb89b91dce99bc, type: 3}
-      propertyPath: maxSaturationLevel
-      value: 999999
+    - target: {fileID: 118572603965017554, guid: 52ee3eb4d5b14644a9bb89b91dce99bc, type: 3}
+      propertyPath: m_Mesh
+      value: 
       objectReference: {fileID: 0}
     - target: {fileID: 4233096486313289635, guid: 52ee3eb4d5b14644a9bb89b91dce99bc, type: 3}
       propertyPath: m_Name

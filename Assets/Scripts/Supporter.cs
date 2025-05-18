@@ -297,7 +297,7 @@ public class Supporter : MonoBehaviour
 
             float timer = 0;
             // 使用 DOTween 的 DOLocalPath 搭配動畫曲線
-            var duration = 1.0f;
+            var duration = 0.5f;
             itemParent.DOLocalPath(path, duration, PathType.CatmullRom).SetEase(Ease.OutQuad).OnComplete(() =>
                 {
                     curOriginItem.PlayerThrowItem();
@@ -320,7 +320,7 @@ public class Supporter : MonoBehaviour
 
             float timer = 0;
             // 使用 DOTween 的 DOLocalPath 搭配動畫曲線
-            var duration = 1.0f;
+            var duration = 0.5f;
             itemParent.DOLocalPath(path, duration, PathType.CatmullRom).SetEase(Ease.OutQuad).OnComplete(() =>
                 {
                     curAdvancedItem.PlayerThrowItem();
