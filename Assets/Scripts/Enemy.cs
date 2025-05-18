@@ -29,10 +29,12 @@ public class Enemy : MonoBehaviour
     Tweener hitMove;
     Transform player;
     Coroutine hitCoroutine;
+    Rigidbody rigidbody;
 
     void Start()
     {
         player = GameObject.FindWithTag("Player").transform;
+        rigidbody = GetComponent<Rigidbody>();
         enemyObj.SetActive(true);
         deadBodyObj.SetActive(false);
     }
@@ -62,17 +64,18 @@ public class Enemy : MonoBehaviour
     }
 
     [Button]
-    public void OnHit()
+    public void OnHit(int damage, float pushForce)
     {
         isHit = true;
-        hitCoroutine = StartCoroutine(ShowHitAnim());
+        hitCoroutine = StartCoroutine(ShowHitAnim(pushForce));
     }
 
-    IEnumerator ShowHitAnim()
+    IEnumerator ShowHitAnim(float pushForce)
     {
         // 朝 player 反向前進
-        Vector3 direction = (player.position - transform.position).normalized * hitDistance;
-        HitMove().Forget();
+        Vector3 direction = (transform.position - player.position).normalized * pushForce;
+        rigidbody.AddForce(direction, ForceMode.Impulse);
+        // HitMove().Forget();
         
         yield return new WaitForSeconds(breakTime);
     }

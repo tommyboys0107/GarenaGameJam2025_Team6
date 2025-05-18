@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using Unity.Cinemachine;
 
 public class CameraShaker : MonoBehaviour
@@ -14,7 +12,7 @@ public class CameraShaker : MonoBehaviour
     public float overrideFrequency = 1.0f;
     public float overrideDuration = 0.5f;
 
-    CinemachineVirtualCamera virtualCamera = null;
+    CinemachineCamera virtualCamera = null;
     CinemachineBasicMultiChannelPerlin perlinNoise = null;
     float maxAmplitute = 1.0f;
     float maxDuration = 1.0f;
@@ -57,8 +55,8 @@ public class CameraShaker : MonoBehaviour
         }
         DontDestroyOnLoad(gameObject);
 
-        virtualCamera = GetComponent<CinemachineVirtualCamera>();
-        perlinNoise = virtualCamera.AddCinemachineComponent<CinemachineBasicMultiChannelPerlin>();
+        virtualCamera = GetComponent<CinemachineCamera>();
+        perlinNoise = virtualCamera.GetComponent<CinemachineBasicMultiChannelPerlin>();
         perlinNoise.NoiseProfile = noiseProfile;
         ResetToRest();
     }
