@@ -21,6 +21,10 @@ public class BattleUIManager : MonoBehaviour
 
 
     [Header("Result Panel")]
+    [SerializeField] Sprite victorySprite;
+    [SerializeField] Sprite loseSprite;
+    [SerializeField] GameObject vTitleImage;
+    [SerializeField] GameObject lTitleImage;
     public GameObject resultPanel;
     public TMP_Text titleText;
     public TMP_Text heroResultText;
@@ -40,6 +44,11 @@ public class BattleUIManager : MonoBehaviour
         bossHealthPanel.SetActive(false);
         CliffLeeCL.EventManager.Instance.onWaterEnergyChanged += UpdateWaterEnergy;
         CliffLeeCL.EventManager.Instance.onPowerEnergyChanged += UpdatePowerEnergy;
+    }
+    void OnDestroy()
+    {
+        CliffLeeCL.EventManager.Instance.onWaterEnergyChanged -= UpdateWaterEnergy;
+        CliffLeeCL.EventManager.Instance.onPowerEnergyChanged -= UpdatePowerEnergy;
     }
 
     public void UpdateHealthBar(int health)
@@ -94,12 +103,14 @@ public class BattleUIManager : MonoBehaviour
         resultPanel.SetActive(true);
         if (isVictory)
         {
-            titleText.text = "VICTORY";
+            vTitleImage.SetActive(true);
+            lTitleImage.SetActive(false);
             BattleManager.Instance.PlaySE(victoryClip);
         }
         else
         {
-            titleText.text = "Lose";
+            vTitleImage.SetActive(false);
+            lTitleImage.SetActive(true);
             BattleManager.Instance.PlaySE(loseClip);
         }
 
