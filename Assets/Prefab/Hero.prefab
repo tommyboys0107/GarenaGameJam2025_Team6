@@ -85,7 +85,7 @@ MeshRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 1
+  m_SortingOrder: 4
   m_AdditionalVertexStreams: {fileID: 0}
 --- !u!114 &5516893452747870410
 MonoBehaviour:
@@ -740,7 +740,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 3
+  m_SortingOrder: 4
   m_Sprite: {fileID: -2413806693520163455, guid: a86470a33a6bf42c4b3595704624658b, type: 3}
   m_Color: {r: 0.0062942505, g: 0, b: 1, a: 1}
   m_FlipX: 0
@@ -822,8 +822,8 @@ MonoBehaviour:
   maxSaturationLevel: 200
   maxPowerEnergy: 3
   maxWaterEnergy: 3
-  saturationLossPerSecond: 10
-  saturationGainPerFood: 40
+  saturationLossPerSecond: 4
+  saturationGainPerFood: 75
   checkerPositionOffset: {x: 0, y: -0.44, z: 0}
   checkerRadius: 0.1
   checkLayer:
@@ -1190,7 +1190,7 @@ MeshRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 1
+  m_SortingOrder: 4
   m_AdditionalVertexStreams: {fileID: 0}
 --- !u!114 &675751741135576899
 MonoBehaviour:
