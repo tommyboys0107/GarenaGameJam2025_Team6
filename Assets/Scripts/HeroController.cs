@@ -17,7 +17,9 @@ namespace CliffLeeCL
         public enum AnimType
         {
             attack,
-            magic01,
+            magic_action,
+            magic_effect,
+            magic_effect2,
             run,
         }
         /// <summary>
@@ -126,6 +128,8 @@ namespace CliffLeeCL
         Transform spineRoot;
         [SerializeField]
         SkeletonAnimation spineAnimation = null;
+        [SerializeField]
+        SkeletonAnimation spineSkillAnimation = null;
         /// <summary>
         /// Time that transition between normalFOV to sprintFOV.
         /// </summary>
@@ -433,6 +437,7 @@ namespace CliffLeeCL
         private async UniTaskVoid SkillAttack1Task()
         {
             isAttacking = true;
+            // ChangeAnimation(AnimType.magic_effect2);
             CurrentPowerEnergy--;
             await powerSkillRange.StartAttack(moveVelocity != Vector3.zero ? moveVelocity : Vector3.left);
             isAttacking = false;
@@ -451,7 +456,7 @@ namespace CliffLeeCL
         private async UniTaskVoid SkillAttack2Task()
         {
             isAttacking = true;
-            ChangeAnimation(AnimType.magic01);
+            ChangeAnimation(AnimType.magic_effect);
             CurrentWaterEnergy--;
             await waterSkillRange.StartAttack(IsFacingRight ? Vector3.right : Vector3.left);
             isAttacking = false;
@@ -495,7 +500,23 @@ namespace CliffLeeCL
         public void ChangeAnimation(AnimType type, bool isLoop = false)
         {
             curAnimType = type;
-            spineAnimation.state.SetAnimation(0, type.ToString(), isLoop);
+            switch (type)
+            {
+
+                case AnimType.attack:
+                case AnimType.run:
+                    spineAnimation.state.SetAnimation(0, type.ToString(), isLoop);
+                    spineSkillAnimation.gameObject.SetActive(false);
+                    break;
+                case AnimType.magic_effect:
+                case AnimType.magic_effect2:
+                    spineAnimation.state.SetAnimation(0, AnimType.magic_action.ToString(), isLoop);
+                    spineSkillAnimation.gameObject.SetActive(true);
+                    spineSkillAnimation.state.SetAnimation(0, type.ToString(), isLoop);
+                    break;
+                default:
+                    throw new ArgumentOutOfRangeException(nameof(type), type, null);
+            }
         }
 
     }

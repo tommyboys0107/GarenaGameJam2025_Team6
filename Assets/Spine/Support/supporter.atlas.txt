@@ -1,0 +1,15 @@
+supporter.png
+size:404,285
+filter:Linear,Linear
+pma:true
+l
+bounds:362,93,38,92
+r
+bounds:317,76,43,109
+小尾巴
+bounds:317,187,85,96
+身體
+bounds:2,68,215,313
+rotate:90
+陰影
+bounds:2,2,276,64

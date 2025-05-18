@@ -1,6 +1,6 @@
 {
 "skeleton": {
-	"hash": "b+LG+JSGeSk",
+	"hash": "n8NQgVFYSP0",
 	"spine": "4.2.40",
 	"x": -845.82,
 	"y": -288,
@@ -331,20 +331,18 @@
 			}
 		}
 	},
-	"magic01": {
+	"magic_action": {
 		"slots": {
 			"圖層 2": {
 				"rgba": [
-					{ "color": "0011ffff" },
-					{ "time": 0.3, "color": "00ffc8ff" },
-					{ "time": 0.4333, "color": "ffffff5c" }
+					{ "color": "0011ff00", "curve": "stepped" },
+					{ "time": 0.4333, "color": "0011ff00" }
 				]
 			},
 			"橢圓 1": {
 				"rgba": [
-					{ "color": "1700ffff" },
-					{ "time": 0.3, "color": "01fbffff" },
-					{ "time": 0.4333, "color": "ffffff5c" }
+					{ "color": "1700ff00", "curve": "stepped" },
+					{ "time": 0.4333, "color": "1700ff00" }
 				]
 			}
 		},
@@ -454,6 +452,381 @@
 					{ "time": 0.2, "x": 0.897 },
 					{ "time": 0.2667, "x": 1.038 },
 					{ "time": 0.3333 }
+				]
+			}
+		}
+	},
+	"magic_effect": {
+		"slots": {
+			"右手": {
+				"rgba": [
+					{ "color": "ffffff00" }
+				]
+			},
+			"右腳": {
+				"rgba": [
+					{ "color": "ffffff00" }
+				]
+			},
+			"圖層 1": {
+				"rgba": [
+					{ "color": "ffffff00" }
+				]
+			},
+			"圖層 2": {
+				"rgba": [
+					{ "color": "0011ffff" },
+					{ "time": 0.3, "color": "00ffc8ff" },
+					{ "time": 0.4333, "color": "ffffff5c" }
+				]
+			},
+			"左手": {
+				"rgba": [
+					{ "color": "ffffff00" }
+				]
+			},
+			"左腳": {
+				"rgba": [
+					{ "color": "ffffff00" }
+				]
+			},
+			"橢圓 1": {
+				"rgba": [
+					{ "color": "1700ffff" },
+					{ "time": 0.3, "color": "01fbffff" },
+					{ "time": 0.4333, "color": "ffffff5c" }
+				]
+			},
+			"身體": {
+				"rgba": [
+					{ "color": "ffffff00" }
+				]
+			}
+		},
+		"bones": {
+			"橢圓 1": {
+				"translate": [
+					{ "x": 615.38, "y": -421.87 }
+				],
+				"scale": [
+					{ "x": 0, "y": 0 },
+					{ "time": 0.1667, "y": 0.15 },
+					{ "time": 0.2667, "x": 2.185, "y": 0.461 }
+				]
+			},
+			"head": {
+				"rotate": [
+					{ "curve": "stepped" },
+					{ "time": 0.3333 }
+				],
+				"translate": [
+					{},
+					{ "time": 0.2, "x": -2.26, "y": -38.35 },
+					{ "time": 0.2667, "x": -4.51, "y": 15.79 },
+					{ "time": 0.3333 }
+				],
+				"scale": [
+					{},
+					{ "time": 0.2, "x": 0.794 },
+					{ "time": 0.2667, "x": 1.094 },
+					{ "time": 0.3333 }
+				]
+			},
+			"body": {
+				"rotate": [
+					{ "curve": "stepped" },
+					{ "time": 0.3333 }
+				],
+				"translate": [
+					{ "curve": "stepped" },
+					{ "time": 0.3333 }
+				],
+				"scale": [
+					{},
+					{ "time": 0.2, "x": 0.884 },
+					{ "time": 0.2667, "x": 1.06 },
+					{ "time": 0.3333 }
+				]
+			},
+			"右手": {
+				"rotate": [
+					{ "curve": "stepped" },
+					{ "time": 0.3333 }
+				],
+				"translate": [
+					{ "curve": "stepped" },
+					{ "time": 0.3333 }
+				],
+				"scale": [
+					{},
+					{ "time": 0.2, "y": 0.771 },
+					{ "time": 0.3333 }
+				]
+			},
+			"左手": {
+				"rotate": [
+					{ "curve": "stepped" },
+					{ "time": 0.3333 }
+				],
+				"translate": [
+					{ "curve": "stepped" },
+					{ "time": 0.3333 }
+				],
+				"scale": [
+					{},
+					{ "time": 0.2, "y": 0.734 },
+					{ "time": 0.3333 }
+				]
+			},
+			"右腳": {
+				"rotate": [
+					{},
+					{ "time": 0.2, "value": -0.31 },
+					{ "time": 0.3333 }
+				],
+				"translate": [
+					{ "curve": "stepped" },
+					{ "time": 0.3333 }
+				],
+				"scale": [
+					{},
+					{ "time": 0.2, "x": 0.935 },
+					{ "time": 0.2667, "x": 1.023 },
+					{ "time": 0.3333 }
+				]
+			},
+			"左腳": {
+				"rotate": [
+					{ "curve": "stepped" },
+					{ "time": 0.3333 }
+				],
+				"translate": [
+					{ "curve": "stepped" },
+					{ "time": 0.3333 }
+				],
+				"scale": [
+					{},
+					{ "time": 0.2, "x": 0.897 },
+					{ "time": 0.2667, "x": 1.038 },
+					{ "time": 0.3333 }
+				]
+			}
+		}
+	},
+	"magic_effect2": {
+		"slots": {
+			"右手": {
+				"rgba": [
+					{ "color": "ffffff00" }
+				]
+			},
+			"右腳": {
+				"rgba": [
+					{ "color": "ffffff00" }
+				]
+			},
+			"圖層 1": {
+				"rgba": [
+					{ "color": "ffffff00" }
+				]
+			},
+			"圖層 2": {
+				"rgba": [
+					{ "color": "ffed822a" },
+					{ "time": 0.0667, "color": "ffed82ff" },
+					{ "time": 0.1, "color": "ffed8200" },
+					{ "time": 0.1667, "color": "ffed822a" },
+					{ "time": 0.2333, "color": "ffed82ff" },
+					{ "time": 0.2667, "color": "ffed8200" },
+					{ "time": 0.3333, "color": "ffed822a" },
+					{ "time": 0.4, "color": "ffed82ff" },
+					{ "time": 0.4333, "color": "ffed8200" },
+					{ "time": 0.5, "color": "ffed822a" },
+					{ "time": 0.5667, "color": "ffed82ff" },
+					{ "time": 0.6, "color": "ffed8200" }
+				]
+			},
+			"左手": {
+				"rgba": [
+					{ "color": "ffffff00" }
+				]
+			},
+			"左腳": {
+				"rgba": [
+					{ "color": "ffffff00" }
+				]
+			},
+			"橢圓 1": {
+				"rgba": [
+					{ "color": "ffed82ff" },
+					{ "time": 0.0667, "color": "fdff0055" },
+					{ "time": 0.1, "color": "1700ff00" },
+					{ "time": 0.1333, "color": "ffed82ff" },
+					{ "time": 0.2, "color": "fdff0055" },
+					{ "time": 0.2333, "color": "1700ff00" },
+					{ "time": 0.2667, "color": "ffed82ff" },
+					{ "time": 0.3333, "color": "fdff0055" },
+					{ "time": 0.3667, "color": "1700ff00" },
+					{ "time": 0.4, "color": "ffed82ff" },
+					{ "time": 0.4667, "color": "fdff0055" },
+					{ "time": 0.5, "color": "1700ff00" },
+					{ "time": 0.5333, "color": "ffed82ff" },
+					{ "time": 0.6, "color": "fdff0055" },
+					{ "time": 0.6333, "color": "1700ff00" },
+					{ "time": 0.7, "color": "fdff0055" },
+					{ "time": 0.7333, "color": "ffed82ff" },
+					{ "time": 0.7667, "color": "1700ff00" }
+				]
+			},
+			"身體": {
+				"rgba": [
+					{ "color": "ffffff00" }
+				]
+			}
+		},
+		"bones": {
+			"橢圓 1": {
+				"translate": [
+					{ "x": 143.25, "y": -421.87 },
+					{ "time": 0.1333, "x": -97.87, "y": -421.87 },
+					{ "time": 0.2667, "x": 143.25, "y": -421.87 },
+					{ "time": 0.4, "x": -97.87, "y": -421.87 },
+					{ "time": 0.5333, "x": -349.87, "y": -421.87 },
+					{ "time": 0.7, "x": 77.25, "y": -421.87 },
+					{ "time": 0.7667, "x": 394.13, "y": -421.87 }
+				],
+				"scale": [
+					{ "x": 0, "y": 0 },
+					{ "time": 0.0667, "x": 1.626, "y": 0.351 },
+					{ "time": 0.1333, "x": 0, "y": 0 },
+					{ "time": 0.2, "x": 1.626, "y": 0.351 },
+					{ "time": 0.2667, "x": 0, "y": 0 },
+					{ "time": 0.3333, "x": 1.626, "y": 0.351 },
+					{ "time": 0.4, "x": 0, "y": 0 },
+					{ "time": 0.4667, "x": 1.626, "y": 0.351 },
+					{ "time": 0.5333, "x": 0, "y": 0 },
+					{ "time": 0.6, "x": 1.626, "y": 0.351, "curve": "stepped" },
+					{ "time": 0.7, "x": 1.626, "y": 0.351 },
+					{ "time": 0.7667, "x": 0, "y": 0 }
+				]
+			},
+			"head": {
+				"rotate": [
+					{ "curve": "stepped" },
+					{ "time": 0.3333 }
+				],
+				"translate": [
+					{},
+					{ "time": 0.2, "x": -2.26, "y": -38.35 },
+					{ "time": 0.2667, "x": -4.51, "y": 15.79 },
+					{ "time": 0.3333 }
+				],
+				"scale": [
+					{},
+					{ "time": 0.2, "x": 0.794 },
+					{ "time": 0.2667, "x": 1.094 },
+					{ "time": 0.3333 }
+				]
+			},
+			"body": {
+				"rotate": [
+					{ "curve": "stepped" },
+					{ "time": 0.3333 }
+				],
+				"translate": [
+					{ "curve": "stepped" },
+					{ "time": 0.3333 }
+				],
+				"scale": [
+					{},
+					{ "time": 0.2, "x": 0.884 },
+					{ "time": 0.2667, "x": 1.06 },
+					{ "time": 0.3333 }
+				]
+			},
+			"右手": {
+				"rotate": [
+					{ "curve": "stepped" },
+					{ "time": 0.3333 }
+				],
+				"translate": [
+					{ "curve": "stepped" },
+					{ "time": 0.3333 }
+				],
+				"scale": [
+					{},
+					{ "time": 0.2, "y": 0.771 },
+					{ "time": 0.3333 }
+				]
+			},
+			"左手": {
+				"rotate": [
+					{ "curve": "stepped" },
+					{ "time": 0.3333 }
+				],
+				"translate": [
+					{ "curve": "stepped" },
+					{ "time": 0.3333 }
+				],
+				"scale": [
+					{},
+					{ "time": 0.2, "y": 0.734 },
+					{ "time": 0.3333 }
+				]
+			},
+			"右腳": {
+				"rotate": [
+					{},
+					{ "time": 0.2, "value": -0.31 },
+					{ "time": 0.3333 }
+				],
+				"translate": [
+					{ "curve": "stepped" },
+					{ "time": 0.3333 }
+				],
+				"scale": [
+					{},
+					{ "time": 0.2, "x": 0.935 },
+					{ "time": 0.2667, "x": 1.023 },
+					{ "time": 0.3333 }
+				]
+			},
+			"左腳": {
+				"rotate": [
+					{ "curve": "stepped" },
+					{ "time": 0.3333 }
+				],
+				"translate": [
+					{ "curve": "stepped" },
+					{ "time": 0.3333 }
+				],
+				"scale": [
+					{},
+					{ "time": 0.2, "x": 0.897 },
+					{ "time": 0.2667, "x": 1.038 },
+					{ "time": 0.3333 }
+				]
+			},
+			"圖層 2": {
+				"translate": [
+					{ "x": -603.46, "y": -30.36, "curve": "stepped" },
+					{ "time": 0.0667, "x": -603.46, "y": -30.36 },
+					{ "time": 0.1667, "x": -380.77, "y": 32.34, "curve": "stepped" },
+					{ "time": 0.2333, "x": -380.77, "y": 32.34 },
+					{ "time": 0.3333, "x": -270.19, "y": -39.48, "curve": "stepped" },
+					{ "time": 0.4, "x": -270.19, "y": -39.48, "curve": "stepped" },
+					{ "time": 0.5, "x": -270.19, "y": -39.48, "curve": "stepped" },
+					{ "time": 0.5667, "x": -270.19, "y": -39.48 }
+				],
+				"scale": [
+					{ "x": 0, "y": 0 },
+					{ "time": 0.0667 },
+					{ "time": 0.1667, "x": 0, "y": 0 },
+					{ "time": 0.2333 },
+					{ "time": 0.3333, "x": 0, "y": 0 },
+					{ "time": 0.4 },
+					{ "time": 0.5, "x": 0, "y": 0 },
+					{ "time": 0.5667 }
 				]
 			}
 		}
