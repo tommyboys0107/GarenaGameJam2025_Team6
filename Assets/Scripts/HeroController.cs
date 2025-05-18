@@ -364,6 +364,11 @@ namespace CliffLeeCL
                 var moveInput = context.ReadValue<Vector2>();
                 moveVelocity = new Vector3(moveInput.x, 0, moveInput.y) * (status.movingSpeed * Time.fixedDeltaTime);
                 sprintVelocity = new Vector3(moveInput.x, 0, moveInput.y) * (status.sprintSpeed * Time.fixedDeltaTime);
+                spineRoot.localScale = new Vector3(IsFacingRight ? -1 : 1, 1, 1);
+                if (curAnimType != AnimType.run && !isAttacking)
+                {
+                    ChangeAnimation(AnimType.run, true);
+                }
                 isMoving = true;
             }
             else
@@ -403,6 +408,7 @@ namespace CliffLeeCL
         private async UniTaskVoid AttackTask()
         {
             isAttacking = true;
+            ChangeAnimation(AnimType.attack);
             await attackRange.StartAttack(IsFacingRight ? Vector3.right : Vector3.left);
             isAttacking = false;
         }
@@ -438,6 +444,7 @@ namespace CliffLeeCL
         private async UniTaskVoid SkillAttack2Task()
         {
             isAttacking = true;
+            ChangeAnimation(AnimType.magic01);
             CurrentWaterEnergy--;
             await waterSkillRange.StartAttack(IsFacingRight ? Vector3.right : Vector3.left);
             isAttacking = false;
