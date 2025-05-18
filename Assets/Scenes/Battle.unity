@@ -3416,14 +3416,6 @@ PrefabInstance:
       propertyPath: m_Mesh
       value: 
       objectReference: {fileID: 0}
-    - target: {fileID: 1670979566951968345, guid: 52ee3eb4d5b14644a9bb89b91dce99bc, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3491787164266564801, guid: 52ee3eb4d5b14644a9bb89b91dce99bc, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 4233096486313289635, guid: 52ee3eb4d5b14644a9bb89b91dce99bc, type: 3}
       propertyPath: m_Name
       value: Hero
@@ -3431,10 +3423,6 @@ PrefabInstance:
     - target: {fileID: 4428803290738876056, guid: 52ee3eb4d5b14644a9bb89b91dce99bc, type: 3}
       propertyPath: m_Mesh
       value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 4804594864095152389, guid: 52ee3eb4d5b14644a9bb89b91dce99bc, type: 3}
-      propertyPath: m_IsActive
-      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5438997667845408638, guid: 52ee3eb4d5b14644a9bb89b91dce99bc, type: 3}
       propertyPath: m_LocalPosition.x
