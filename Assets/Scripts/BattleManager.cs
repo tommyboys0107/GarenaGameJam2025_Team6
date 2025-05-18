@@ -31,9 +31,17 @@ public class BattleManager : MonoBehaviour
 
     void Start()
     {
+        CliffLeeCL.EventManager.Instance.onGameOver += GameLose;
         StartCoroutine(BattleFlow());
     }
-
+    void OnDestroy()
+    {
+        CliffLeeCL.EventManager.Instance.onGameOver -= GameLose;
+    }
+    void GameLose()
+    {
+        EndBattle(false);
+    }
     private void Update()
     {
         if (Keyboard.current.digit9Key.wasPressedThisFrame)
