@@ -398,12 +398,12 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 24300002, guid: 14bc82d8dacc3db428865e9c7f7036fc, type: 2}
-  m_audioClip: {fileID: 0}
-  m_Resource: {fileID: 0}
+  m_audioClip: {fileID: 8300000, guid: d7a4cc56f28c9444dbc41982a3225dcc, type: 3}
+  m_Resource: {fileID: 8300000, guid: d7a4cc56f28c9444dbc41982a3225dcc, type: 3}
   m_PlayOnAwake: 1
   m_Volume: 1
   m_Pitch: 1
-  Loop: 0
+  Loop: 1
   Mute: 0
   Spatialize: 0
   SpatializePostEffects: 0
@@ -1152,17 +1152,6 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 3010722220417622296, guid: 9758f1f15354ee64db4f23f0898462bb, type: 3}
   m_PrefabInstance: {fileID: 1731637771}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1731637773 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 4009967745674008858, guid: 9758f1f15354ee64db4f23f0898462bb, type: 3}
-  m_PrefabInstance: {fileID: 1731637771}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1763787790 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 4053369975251478315, guid: dedbe1baba84805418817214d5479e65, type: 3}
@@ -1219,7 +1208,8 @@ MonoBehaviour:
   normalEnergyIcon: {fileID: 1185856871112690257, guid: 8ad40d1265777e148a4dcef87d7731e3, type: 3}
   victorySprite: {fileID: -7642986446173420197, guid: fca50c9bf63cc764499cc5bc184d9726, type: 3}
   loseSprite: {fileID: -8557816031639189491, guid: 82bfcda5a031c544a9d8331a9436027a, type: 3}
-  title: {fileID: 1731637773}
+  vTitleImage: {fileID: 0}
+  lTitleImage: {fileID: 0}
   resultPanel: {fileID: 778586798}
   titleText: {fileID: 880887203}
   heroResultText: {fileID: 618546687}
