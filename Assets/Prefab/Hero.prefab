@@ -297,14 +297,14 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3340186973309661005}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: -0.030625766, z: 0, w: 0.9995309}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 7166580010356718135}
   m_Father: {fileID: 5438997667845408638}
-  m_LocalEulerAnglesHint: {x: 0, y: -3.51, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &5161324822422129391
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -323,9 +323,9 @@ MonoBehaviour:
   delayOpenRangeTime: 0.3
   rangeOpenDuration: 1
   enableCameraShake: 1
-  cameraShakeAmplitude: 2
-  cameraShakeFrequency: 1
-  cameraShakeDuration: 1
+  cameraShakeAmplitude: 1
+  cameraShakeFrequency: 5
+  cameraShakeDuration: 0.3
 --- !u!54 &1427000542099901351
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -382,7 +382,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0.7071068, y: 0, z: 0, w: 0.7071068}
   m_LocalPosition: {x: 0, y: 0, z: 5}
-  m_LocalScale: {x: 2.5, y: 5, z: 2.5000007}
+  m_LocalScale: {x: 3, y: 10, z: 3}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 7228952003499945584}
@@ -1233,7 +1233,7 @@ MonoBehaviour:
   updateTiming: 1
   unscaledTime: 0
   _animationName: attack
-  loop: 1
+  loop: 0
   timeScale: 1
 --- !u!1 &4804594864095152389
 GameObject:
