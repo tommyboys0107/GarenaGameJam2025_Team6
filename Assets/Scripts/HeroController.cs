@@ -161,6 +161,7 @@ namespace CliffLeeCL
         private float originalItemYPosition;
         private Transform interactableItemTransform;
         private AnimType curAnimType;
+        private CraftingTable craftingTable;
         private bool IsFacingRight => moveVelocity.x > 0; 
 
         /// <summary>
@@ -256,8 +257,11 @@ namespace CliffLeeCL
             }
             else if (other.CompareTag("CraftingTable"))
             {
-                var craftingTable = other.GetComponent<CraftingTable>();
-                craftingTable.HeroHoldItem(true);
+                craftingTable = other.GetComponent<CraftingTable>();
+                if (interactableItemTransform == null)
+                {
+                    craftingTable.SetHint(true);
+                }
                 interactableItemTransform = other.transform.parent;
             }
         }
@@ -266,8 +270,7 @@ namespace CliffLeeCL
         {
             if (other.CompareTag("CraftingTable"))
             {
-                var craftingTable = other.GetComponent<CraftingTable>();
-                craftingTable.HeroHoldItem(false);
+                craftingTable?.SetHint(false);
                 interactableItemTransform = null;
             }
         }
@@ -392,6 +395,7 @@ namespace CliffLeeCL
                         new Vector3(transform.position.x, originalItemYPosition, transform.position.z - 1.0f);
                     interactableItemTransform = null;
                     isHoldingItem = false;
+                    craftingTable?.HeroHoldItem(false);
                 }
                 else
                 {
@@ -399,6 +403,7 @@ namespace CliffLeeCL
                     interactableItemTransform.parent = itemRoot;
                     interactableItemTransform.localPosition = Vector3.zero;
                     isHoldingItem = true;
+                    craftingTable?.HeroHoldItem(true);
                 }
             }
             else
