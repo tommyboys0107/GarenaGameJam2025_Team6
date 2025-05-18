@@ -45,6 +45,9 @@ public class Supporter : MonoBehaviour
     /// </summary>
     public LayerMask checkLayer;
 
+    [SerializeField] 
+    private SpriteRenderer spriteRenderer;
+
 
     [Header("FOV transition")]
     /// <summary>
@@ -99,7 +102,8 @@ public class Supporter : MonoBehaviour
     private bool isGameOver = false;
     Vector3 moveVelocity = Vector3.zero;
     Vector3 sprintVelocity = Vector3.zero;
-
+    private bool IsFacingRight => moveVelocity.x > 0; 
+    
     #endregion
 
     [Header("道具相關")]
@@ -222,6 +226,7 @@ public class Supporter : MonoBehaviour
             var moveInput = context.ReadValue<Vector2>();
             moveVelocity = new Vector3(moveInput.x, 0, moveInput.y) * (status.movingSpeed * Time.fixedDeltaTime);
             sprintVelocity = new Vector3(moveInput.x, 0, moveInput.y) * (status.sprintSpeed * Time.fixedDeltaTime);
+            spriteRenderer.flipX = IsFacingRight;
             isMoving = true;
         }
         else

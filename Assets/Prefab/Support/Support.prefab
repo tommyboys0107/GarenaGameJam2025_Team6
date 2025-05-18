@@ -88,6 +88,7 @@ MonoBehaviour:
   checkLayer:
     serializedVersion: 2
     m_Bits: 0
+  spriteRenderer: {fileID: 3832970114116225688}
   normalFOV: 60
   sprintFOV: 65
   FOVTransitionTime: 0.5

@@ -23,7 +23,7 @@ public class Enemy : MonoBehaviour
     GameObject enemyObj = null;
     [SerializeField]
     GameObject deadBodyObj = null;
-
+    
     bool isHit;
     bool isDead;
     Tweener hitMove;
