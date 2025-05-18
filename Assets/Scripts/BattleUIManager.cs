@@ -10,6 +10,15 @@ public class BattleUIManager : MonoBehaviour
     public Text timerText;
     public GameObject bossHealthPanel;
     public Image bossHealthBar;
+    [SerializeField] GameObject[] waterEnergies;
+    [SerializeField] GameObject[] powerEnergies;
+    [SerializeField] Image waterEnergyIcon;
+    [SerializeField] Image powerEnergyIcon;
+    [SerializeField] Sprite grayWaterIcon;
+    [SerializeField] Sprite grayEnergyIcon;
+    [SerializeField] Sprite normalWaterIcon;
+    [SerializeField] Sprite normalEnergyIcon;
+
 
     [Header("Result Panel")]
     public GameObject resultPanel;
@@ -29,11 +38,49 @@ public class BattleUIManager : MonoBehaviour
     {
         resultPanel.SetActive(false);
         bossHealthPanel.SetActive(false);
+        CliffLeeCL.EventManager.Instance.onWaterEnergyChanged += UpdateWaterEnergy;
+        CliffLeeCL.EventManager.Instance.onPowerEnergyChanged += UpdatePowerEnergy;
     }
 
     public void UpdateHealthBar(int health)
     {
         healthSlider.value = health;
+    }
+    void UpdateWaterEnergy(int currentWaterEnergy)
+    {
+        for (int i = 0; i < 3; i++)
+        {
+            if (i < currentWaterEnergy)
+                waterEnergies[i].SetActive(true);
+            else
+                waterEnergies[i].SetActive(false);
+        }
+        if (currentWaterEnergy == 0)
+        {
+            waterEnergyIcon.sprite = grayWaterIcon;
+        }
+        else
+        {
+            waterEnergyIcon.sprite = normalWaterIcon;
+        }
+    }
+    void UpdatePowerEnergy(int currentPowerEnergy)
+    {
+        for (int i = 0; i < 3; i++)
+        {
+            if (i < currentPowerEnergy)
+                powerEnergies[i].SetActive(true);
+            else
+                powerEnergies[i].SetActive(false);
+        }
+        if (currentPowerEnergy == 0)
+        {
+            powerEnergyIcon.sprite = grayEnergyIcon;
+        }
+        else
+        {
+            powerEnergyIcon.sprite = normalEnergyIcon;
+        }
     }
 
     public void UpdateTimer(float time)
@@ -64,5 +111,5 @@ public class BattleUIManager : MonoBehaviour
         energyText.text = PlayerStats.Instance.totalGainedEnergy.ToString();
     }
 
-    
+
 }
