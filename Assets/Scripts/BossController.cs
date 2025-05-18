@@ -1,6 +1,6 @@
 using UnityEngine;
 using UnityEngine.UI;
-
+using Spine.Unity;
 using System.Collections;
 using Cysharp.Threading.Tasks;
 using Sirenix.OdinInspector;
@@ -11,7 +11,7 @@ public class BossController : MonoBehaviour
     [SerializeField] float followSpeed = 3.5f;
     [SerializeField] float skillCooldown = 15f;
     // [SerializeField] float speed = 3f;
-    [SerializeField] float stopDistance = 10f;
+    [SerializeField] float stopDistance = 0f;
     [SerializeField] float hitDistance = 10f;
     [SerializeField] float hitDuration = 1.0f;
 
@@ -24,11 +24,13 @@ public class BossController : MonoBehaviour
     [SerializeField] float stunDuration = 2f;
     [SerializeField] float breakTime = 1f;
     [SerializeField] float hitDamage = 10f;
+    [SerializeField] float attackDelay = 4f;
     float currentHealth;
     [SerializeField]
     int obstacleCollisionCount;
     bool isStunned;
     bool isHitFly;
+    bool isAttack;
     [SerializeField] SpriteRenderer bossSpriteRenderer;
     [SerializeField] Sprite normalBossImage;
     [SerializeField] Sprite stunnedBossImage;
@@ -36,9 +38,14 @@ public class BossController : MonoBehaviour
     [SerializeField] AudioClip StunSE;
     [SerializeField] AudioClip magicSE;
     [SerializeField] AudioClip buildingExplodeSE;
-
-    // [Header("UI")]
-    // [SerializeField] private Image fillImage;
+    [Header("Spine")]
+    private BossAnimType curAnimType;
+    [SerializeField] SkeletonAnimation spineAnimation = null;
+    public enum BossAnimType
+    {
+        stay,
+        animation
+    }
 
 
     void Start()
@@ -46,12 +53,11 @@ public class BossController : MonoBehaviour
 
         currentHealth = maxHealth;
         CreateObstacleCircle();
-        // StartCoroutine(SkillRoutine());
     }
 
     void Update()
     {
-        if (!isStunned)
+        if (!isStunned && !isAttack)
         {
             float distance = Vector3.Distance(transform.position, BattleManager.Instance.heroPoint.position);
 
@@ -152,7 +158,6 @@ public class BossController : MonoBehaviour
         Debug.Log("[Boss] enter OnTriggerEnter" + collision.gameObject);
         if (collision.gameObject.CompareTag("Build") && isHitFly)
         {
-            Debug.Log("[Boss] enter build");
             obstacleCollisionCount++;
 
             // 觸發破壞建築(改到建築物端製作)
@@ -165,11 +170,21 @@ public class BossController : MonoBehaviour
                 StartCoroutine(StunRoutine());
             }
         }
+        else if(collision.gameObject.CompareTag("Player") && !isHitFly && !isStunned && !isAttack)
+        {
+            isAttack = true;
+            StartCoroutine(AttackRoutine());
+        }
     }
-    void BreakBuilding(GameObject go)
+    IEnumerator AttackRoutine()
     {
-        go.SetActive(false);
-        BattleManager.Instance.PlaySE(buildingExplodeSE);
+        Debug.Log("[Boss] AttackRoutine");
+        ChangeAnimation(BossAnimType.animation);
+        yield return new WaitForSeconds(attackDelay);
+        isAttack = false;
+        Debug.Log("[Boss] AttackRoutine false");
+        ChangeAnimation(BossAnimType.stay);
+
     }
 
     System.Collections.IEnumerator StunRoutine()
@@ -183,5 +198,11 @@ public class BossController : MonoBehaviour
         bossSpriteRenderer.sprite = normalBossImage;
         Debug.Log("[Boss] Stun ends");
         obstacleCollisionCount = 0;
+    }
+    [Button]
+    public void ChangeAnimation(BossAnimType type, bool isLoop = false)
+    {
+        curAnimType = type;
+        spineAnimation.state.SetAnimation(0, type.ToString(), isLoop);
     }
 }

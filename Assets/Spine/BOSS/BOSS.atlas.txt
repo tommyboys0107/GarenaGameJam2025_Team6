@@ -1,0 +1,12 @@
+BOSS.png
+size:2020,1648
+filter:Linear,Linear
+pma:true
+l
+bounds:2,580,948,1066
+r
+bounds:952,698,948,1066
+rotate:90
+身體
+bounds:952,2,694,975
+rotate:90
