@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 public class Item : MonoBehaviour
@@ -7,6 +8,7 @@ public class Item : MonoBehaviour
 
     [SerializeField]
     GameObject hint = null;
+
     public enum ItemType
     {
         DeadBody,
@@ -16,7 +18,7 @@ public class Item : MonoBehaviour
         WaterEnergy,
         PowerEnergy,
     }
-    
+
     [SerializeField]
     ItemType itemType = ItemType.DeadBody;
 
@@ -27,8 +29,23 @@ public class Item : MonoBehaviour
 
     public void PlayerGetItem()
     {
+        switch (itemType)
+        {
+            case ItemType.DeadBody:
+            case ItemType.Water:
+            case ItemType.Power:
+                boxCollider.enabled = false;
+                break;
+            default:
+                break;
+        }
+
         SetHint(false);
-        boxCollider.enabled = false;
+    }
+
+    public void PlayerThrowItem()
+    {
+        boxCollider.enabled = true;
     }
 
 

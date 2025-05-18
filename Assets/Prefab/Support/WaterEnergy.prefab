@@ -8,13 +8,17 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 643021585167931230, guid: 17bbbc925377ea14f96b3a1a9446ddd7, type: 3}
+      propertyPath: itemType
+      value: 4
+      objectReference: {fileID: 0}
     - target: {fileID: 1199169631829475847, guid: 17bbbc925377ea14f96b3a1a9446ddd7, type: 3}
       propertyPath: m_TagString
       value: WaterEnergy
       objectReference: {fileID: 0}
     - target: {fileID: 8412331605094894342, guid: 17bbbc925377ea14f96b3a1a9446ddd7, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 3.48
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8412331605094894342, guid: 17bbbc925377ea14f96b3a1a9446ddd7, type: 3}
       propertyPath: m_LocalPosition.y
@@ -22,7 +26,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8412331605094894342, guid: 17bbbc925377ea14f96b3a1a9446ddd7, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -0.1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8412331605094894342, guid: 17bbbc925377ea14f96b3a1a9446ddd7, type: 3}
       propertyPath: m_LocalRotation.w
@@ -54,7 +58,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8519430698638072287, guid: 17bbbc925377ea14f96b3a1a9446ddd7, type: 3}
       propertyPath: m_Name
-      value: WaterEnergy Variant
+      value: WaterEnergy
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
