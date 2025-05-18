@@ -188,6 +188,7 @@ public class Supporter : MonoBehaviour
         else if (other.CompareTag("CraftingTable"))
         {
             craftingTable = other.GetComponent<CraftingTable>();
+            craftingTable.SetHint(true);
         }
     }
 
@@ -206,6 +207,7 @@ public class Supporter : MonoBehaviour
         }
         else if (other.CompareTag("CraftingTable"))
         {
+            craftingTable?.SetHint(false);
             craftingTable = null;
         }
     }
@@ -281,6 +283,11 @@ public class Supporter : MonoBehaviour
             }
             encounterItem = null;
         }
+        else if (craftingTable != null && !craftingTable.CheckIsHold() && curOriginItem != null)
+        {
+            craftingTable.CraftItem(curOriginItem);
+            curOriginItem = null;
+        }
         else if (curOriginItem != null)
         {
             var itemParent = curOriginItem.transform.parent;
@@ -326,11 +333,6 @@ public class Supporter : MonoBehaviour
                     curAdvancedItem.PlayerThrowItem();
                     curAdvancedItem = null;
                 });
-        }
-        else if (craftingTable != null && !craftingTable.CheckIsHold() && curOriginItem != null)
-        {
-            craftingTable.CraftItem(curOriginItem);
-            curOriginItem = null;
         }
     }
 

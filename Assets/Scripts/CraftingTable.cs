@@ -9,6 +9,8 @@ public class CraftingTable : MonoBehaviour
 {
     Transform itemParent;
     [SerializeField]
+    GameObject hint = null;
+    [SerializeField]
     GameObject foodPrefab = null;
     [SerializeField]
     GameObject waterEnergyPrefab = null;
@@ -22,6 +24,7 @@ public class CraftingTable : MonoBehaviour
 
     public void CraftItem(Item item)
     {
+        SetHint(false);
         itemType = item.GetType();
         Debug.Log("CraftItem now!");
         StartCoroutine(UseCraftingTable(item));
@@ -100,5 +103,9 @@ public class CraftingTable : MonoBehaviour
         return isHold;
     }
 
+    public void SetHint(bool enable)
+    {
+        hint.SetActive(enable);
+    }
 
 }
