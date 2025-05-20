@@ -34,5 +34,13 @@ public class AttackRange : MonoBehaviour
                 CameraShaker.Instance.Shake(cameraShakeAmplitude, cameraShakeFrequency, cameraShakeDuration);
             }
         }
+        if (other.GetComponent<BossController>())
+        {
+            other.GetComponent<BossController>().OnHit(damage, pushForce);
+            if (enableCameraShake)
+            {
+                CameraShaker.Instance.Shake(cameraShakeAmplitude, cameraShakeFrequency, cameraShakeDuration);
+            }
+        }
     }
 }

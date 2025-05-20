@@ -42,6 +42,11 @@ public class BossController : MonoBehaviour
     [Header("Spine")]
     private BossAnimType curAnimType;
     [SerializeField] SkeletonAnimation spineAnimation = null;
+    bool isHit;
+    Transform player;
+    Coroutine hitCoroutine;
+    Rigidbody rigidbody;
+
     public enum BossAnimType
     {
         stay,
@@ -51,7 +56,8 @@ public class BossController : MonoBehaviour
 
     void Start()
     {
-
+        player = GameObject.FindWithTag("Player").transform;
+        rigidbody = GetComponent<Rigidbody>();
         currentHealth = maxHealth;
         CreateObstacleCircle();
     }
@@ -104,7 +110,7 @@ public class BossController : MonoBehaviour
 
     public void TakeDamage()
     {
-        if (obstacleCollisionCount < 3) return;
+        // if (obstacleCollisionCount < 3) return;
 
         currentHealth = Mathf.Max(0, currentHealth - hitDamage);
         BattleManager.Instance.HitSE();
@@ -125,28 +131,38 @@ public class BossController : MonoBehaviour
         }
     }
     [Button]
-    public void OnHit()
+    public void OnHit(int damage, float pushForce)
     {
-        // isHit = true;
+        isHit = true;
 
         if (isStunned)
             TakeDamage();
         else
         {
             isHitFly = true;
-            StartCoroutine(ShowHitAnimAndMove());
+            hitCoroutine = StartCoroutine(ShowHitAnim(pushForce));
         }
     }
 
-    IEnumerator ShowHitAnimAndMove()
+    IEnumerator ShowHitAnim(float pushForce)
     {
         // 朝 player 反向前進
-        Vector3 direction = (BattleManager.Instance.heroPoint.position - transform.position).normalized * hitDistance;
-        HitMove().Forget();
-
+        Vector3 direction = (transform.position - player.position).normalized * pushForce;
+        rigidbody.AddForce(direction, ForceMode.Impulse);
+        // HitMove().Forget();
+        
         yield return new WaitForSeconds(breakTime);
         isHitFly = false;
     }
+    // IEnumerator ShowHitAnimAndMove()
+    // {
+    //     // 朝 player 反向前進
+    //     Vector3 direction = (BattleManager.Instance.heroPoint.position - transform.position).normalized * hitDistance;
+    //     HitMove().Forget();
+    //
+    //     yield return new WaitForSeconds(breakTime);
+    //     isHitFly = false;
+    // }
 
     public async UniTaskVoid HitMove()
     {
@@ -173,6 +189,10 @@ public class BossController : MonoBehaviour
         Debug.Log("[Boss] enter OnTriggerEnter" + collision.gameObject);
         if (collision.gameObject.CompareTag("Build") && isHitFly)
         {
+            
+            var build = collision.transform.parent.gameObject.GetComponent<Build>();
+            build?.Collapse();
+            
             obstacleCollisionCount++;
 
             // 觸發破壞建築(改到建築物端製作)

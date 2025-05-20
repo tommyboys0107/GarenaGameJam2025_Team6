@@ -90,7 +90,7 @@ MonoBehaviour:
   obstaclePrefab: {fileID: 8242078466828642764, guid: d3167c9eadf9c604b991b78915f3f294, type: 3}
   maxHealth: 500
   stunDuration: 2
-  breakTime: 1
+  breakTime: 3
   hitDamage: 50
   attackDelay: 4
   obstacleCollisionCount: 0
@@ -175,7 +175,7 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 6, y: 10, z: 6}
+  m_Size: {x: 5.5, y: 10, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!54 &4061935263313297304
 Rigidbody:
@@ -185,9 +185,9 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7961737635758174275}
   serializedVersion: 5
-  m_Mass: 1
-  m_LinearDamping: 0
-  m_AngularDamping: 0.05
+  m_Mass: 0.2
+  m_LinearDamping: 0.5
+  m_AngularDamping: 1
   m_CenterOfMass: {x: 0, y: 0, z: 0}
   m_InertiaTensor: {x: 1, y: 1, z: 1}
   m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
@@ -200,9 +200,9 @@ Rigidbody:
   m_ImplicitCom: 1
   m_ImplicitTensor: 1
   m_UseGravity: 0
-  m_IsKinematic: 1
+  m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 4
+  m_Constraints: 116
   m_CollisionDetection: 0
 --- !u!1 &9085031507452749673
 GameObject:
