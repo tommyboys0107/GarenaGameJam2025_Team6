@@ -4,12 +4,18 @@ using CliffLeeCL;
 using Cysharp.Threading.Tasks;
 using DG.Tweening;
 using Sirenix.OdinInspector;
+using Spine.Unity;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using Random = UnityEngine.Random;
 
 public class Supporter : MonoBehaviour
 {
+    public enum AnimType
+    {
+        run,
+        stay,
+    }
 
     #region CL
 
@@ -64,6 +70,12 @@ public class Supporter : MonoBehaviour
     /// </summary>
     public float FOVTransitionTime = 0.5f;
 
+    [Header("Spine")]
+    [SerializeField]
+    Transform spineRoot = null;
+    [SerializeField]
+    SkeletonAnimation spineAnimation = null;
+    
     /// <summary>
     /// Time that transition between normalFOV to sprintFOV.
     /// </summary>
@@ -112,8 +124,10 @@ public class Supporter : MonoBehaviour
     Item curOriginItem = null;
     Item curAdvancedItem = null;
     CraftingTable craftingTable = null;
+    
+    AnimType curAnimType;
 
-    List<Item> itemList = new List<Item>(); 
+    List<Item> itemList = new List<Item>();
 
     void Start()
     {
@@ -224,10 +238,20 @@ public class Supporter : MonoBehaviour
             moveVelocity = new Vector3(moveInput.x, 0, moveInput.y) * (status.movingSpeed * Time.fixedDeltaTime);
             sprintVelocity = new Vector3(moveInput.x, 0, moveInput.y) * (status.sprintSpeed * Time.fixedDeltaTime);
             spriteRenderer.flipX = IsFacingRight;
+            spineRoot.localScale = new Vector3(IsFacingRight ? -1 : 1, 1, 1);
+            if (curAnimType != AnimType.run)
+            {
+                ChangeAnimation(AnimType.run, true);
+            }
+            
             isMoving = true;
         }
         else
         {
+            if (curAnimType != AnimType.stay)
+            {
+                ChangeAnimation(AnimType.stay, true);
+            }
             isMoving = false;
         }
     }
@@ -255,6 +279,22 @@ public class Supporter : MonoBehaviour
         else
         {
             isinteractive = false;
+        }
+    }
+
+    [Button]
+    public void ChangeAnimation(AnimType type, bool isLoop = false)
+    {
+        curAnimType = type;
+        switch (type)
+        {
+
+            case AnimType.run:
+            case AnimType.stay:
+                spineAnimation.state.SetAnimation(0, type.ToString(), isLoop);
+                break;
+            default:
+                throw new ArgumentOutOfRangeException(nameof(type), type, null);
         }
     }
 
