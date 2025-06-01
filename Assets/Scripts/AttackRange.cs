@@ -7,6 +7,7 @@ public class AttackRange : MonoBehaviour
     public int damage;
     public float pushForce;
     public GameObject colliderObj;
+    public GameObject attackEffect;
     public float delayOpenRangeTime;
     public float rangeOpenDuration;
     [Header("Camera Shake")]
@@ -20,6 +21,10 @@ public class AttackRange : MonoBehaviour
         await UniTask.WaitForSeconds(delayOpenRangeTime);
         colliderObj.SetActive(true);
         transform.forward = direction.normalized;
+        if (attackEffect)
+        {
+            var effectObj = Instantiate(attackEffect, colliderObj.transform.position, Quaternion.identity);
+        }
         await UniTask.WaitForSeconds(rangeOpenDuration);
         colliderObj.SetActive(false);
     }
