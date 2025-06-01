@@ -8,6 +8,7 @@ public class AttackRange : MonoBehaviour
     public float pushForce;
     public GameObject colliderObj;
     public GameObject attackEffect;
+    public GameObject hitEffect;
     public float delayOpenRangeTime;
     public float rangeOpenDuration;
     [Header("Camera Shake")]
@@ -34,6 +35,10 @@ public class AttackRange : MonoBehaviour
         if (other.transform.parent != null && other.transform.parent.GetComponent<Enemy>())
         {
             other.transform.parent.GetComponent<Enemy>().OnHit(damage, pushForce);
+            if (hitEffect)
+            {
+                var effectObj = Instantiate(hitEffect, other.transform.position, Quaternion.identity); 
+            }
             if (enableCameraShake)
             {
                 CameraShaker.Instance.Shake(cameraShakeAmplitude, cameraShakeFrequency, cameraShakeDuration);
@@ -42,6 +47,10 @@ public class AttackRange : MonoBehaviour
         if (other.GetComponent<BossController>())
         {
             other.GetComponent<BossController>().OnHit(damage, pushForce);
+            if (hitEffect)
+            {
+                var effectObj = Instantiate(hitEffect, other.transform.position, Quaternion.identity); 
+            }
             if (enableCameraShake)
             {
                 CameraShaker.Instance.Shake(cameraShakeAmplitude, cameraShakeFrequency, cameraShakeDuration);
